@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "notes": "Initial release of TOIRE - ゲーマー特化軽量化ツール",
+  "pub_date": "2026-11-01T00:00:00Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHNpZ25hdHVyZSBmb3IgeyBibG9ja19kaWdlc3QgCg==",
+      "url": "https://github.com/wasaomen/FARST/releases/download/v0.1.0/TOIRE_0.1.0_x64-setup.exe"
+    }
+  }
+}
