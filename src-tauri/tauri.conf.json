@@ -53,7 +53,8 @@
       "endpoints": [
         "https://github.com/wasaomen/FARST/releases/latest/download/latest.json"
       ],
-      "dialog": false
+      "dialog": false,
+      "pubkey": ""
     }
   }
 }
