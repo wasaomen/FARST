@@ -703,6 +703,103 @@
             50% { width: 70%; }
             100% { width: 100%; }
         }
+
+        /* Update Notification Banner */
+        .update-banner {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(255, 51, 51, 0.9) 0%, rgba(255, 102, 102, 0.9) 100%);
+            border: 1px solid rgba(255, 51, 51, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            z-index: 10000;
+            display: none;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 30px rgba(255, 51, 51, 0.4);
+            max-width: 350px;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .update-banner.show {
+            display: block;
+        }
+
+        .update-banner h3 {
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .update-banner p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .update-banner-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .update-banner-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .update-banner-btn.primary {
+            background: #fff;
+            color: #ff3333;
+        }
+
+        .update-banner-btn.primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .update-banner-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .update-banner-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .update-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .update-close:hover {
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -712,6 +809,17 @@
         <div class="loading-text">Loading...</div>
         <div class="loading-progress">
             <div class="loading-progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Update Notification Banner -->
+    <div class="update-banner" id="updateBanner">
+        <button class="update-close" onclick="dismissUpdate()">×</button>
+        <h3>Update Available</h3>
+        <p id="updateMessage">新しいバージョンが利用可能です。</p>
+        <div class="update-banner-actions">
+            <button class="update-banner-btn primary" onclick="installUpdate()">Update Now</button>
+            <button class="update-banner-btn secondary" onclick="dismissUpdate()">Later</button>
         </div>
     </div>
 
@@ -1457,10 +1565,7 @@
 
         // Temperature tabs
         let currentTempType = 'cpu';
-        const tempData = {
-            cpu: { current: 50, history: [48, 47, 49, 50, 48, 47, 46, 48, 50, 49] },
-            gpu: { current: 45, history: [42, 43, 44, 45, 44, 43, 42, 44, 45, 44] }
-        };
+        let tempData = { cpu: { current: 0, history: [] }, gpu: { current: 0, history: [] } };
 
         document.querySelectorAll('.temp-tab').forEach(tab => {
             tab.addEventListener('click', () => {
@@ -1472,23 +1577,56 @@
             });
         });
 
+        async function loadTemperatureData() {
+            try {
+                if (!invoke) return;
+                
+                const tempData = await invoke('get_temperature');
+                
+                // Update temp data object
+                const newCpuTemp = tempData.cpu_temp;
+                const newGpuTemp = tempData.gpu_temp;
+                
+                // Update history
+                tempData.cpu.history.push(newCpuTemp);
+                tempData.gpu.history.push(newGpuTemp);
+                
+                // Keep only last 10 readings
+                if (tempData.cpu.history.length > 10) tempData.cpu.history.shift();
+                if (tempData.gpu.history.length > 10) tempData.gpu.history.shift();
+                
+                tempData.cpu.current = newCpuTemp;
+                tempData.gpu.current = newGpuTemp;
+                
+                updateTemperatureDisplay();
+            } catch (error) {
+                console.error('Error loading temperature:', error);
+            }
+        }
+
         function updateTemperatureDisplay() {
             const data = tempData[currentTempType];
-            document.getElementById('tempCurrent').textContent = data.current;
-            document.getElementById('tempHistory').textContent = `${data.history[data.history.length - 1]}°C - 5 seconds ago`;
+            document.getElementById('tempCurrent').textContent = Math.round(data.current);
+            
+            if (data.history.length > 0) {
+                document.getElementById('tempHistory').textContent = `${Math.round(data.history[data.history.length - 1])}°C - 5 seconds ago`;
+            }
             
             // Update graph
             const graphLine = document.getElementById('tempGraphLine');
-            const points = data.history.map((temp, index) => {
-                const x = (index / (data.history.length - 1)) * 400;
-                const y = 100 - (temp / 100) * 100;
-                return `${x},${y}`;
-            }).join(' ');
-            graphLine.setAttribute('d', `M${points}`);
+            if (data.history.length > 0) {
+                const points = data.history.map((temp, index) => {
+                    const x = (index / (data.history.length - 1)) * 400;
+                    const y = 100 - (temp / 100) * 100;
+                    return `${x},${y}`;
+                }).join(' ');
+                graphLine.setAttribute('d', `M${points}`);
+            }
         }
 
-        // Initialize temperature display
-        updateTemperatureDisplay();
+        // Load temperature data initially and periodically
+        loadTemperatureData();
+        setInterval(loadTemperatureData, 5000);
 
         // System status
         async function loadSystemStatus() {
@@ -1658,27 +1796,74 @@
         // Check for updates
         async function checkForUpdate() {
             try {
-                if (!window.__TAURI__?.plugin?.updater) {
-                    alert('アップデート機能はインストーラー版でのみ利用可能です');
-                    return;
-                }
+                if (invoke) {
+                    const info = await invoke('check_update');
 
-                const { checkUpdate, installUpdate } = window.__TAURI__.plugin.updater;
-                
-                const updateAvailable = await checkUpdate();
-                
-                if (updateAvailable) {
-                    const shouldUpdate = confirm('新しいバージョンが利用可能です。今すぐ更新しますか？');
-                    if (shouldUpdate) {
-                        await installUpdate();
-                        alert('更新が完了しました。アプリを再起動してください');
+                    if (info.available) {
+                        const message = `新しいバージョン ${info.version} が利用可能です\n\n${info.body}`;
+                        const shouldUpdate = confirm(message + '\n\n今すぐ更新しますか？');
+                        if (shouldUpdate) {
+                            await installUpdate();
+                        }
+                    } else {
+                        alert('最新バージョンを使用しています');
                     }
                 } else {
-                    alert('最新バージョンを使用しています');
+                    alert('アップデート機能は現在利用できません');
                 }
             } catch (error) {
                 console.error('Update check error:', error);
-                alert('アップデートチェック中にエラーが発生しました');
+                alert('アップデートチェック中にエラーが発生しました: ' + error);
+            }
+        }
+
+        // Auto check for updates on startup
+        async function autoCheckUpdate() {
+            try {
+                if (invoke) {
+                    const info = await invoke('check_update');
+
+                    if (info.available) {
+                        const updateBanner = document.getElementById('updateBanner');
+                        const updateMessage = document.getElementById('updateMessage');
+
+                        if (updateMessage && info.body) {
+                            updateMessage.textContent = `新しいバージョン ${info.version} が利用可能です\n${info.body}`;
+                        }
+
+                        if (updateBanner) {
+                            updateBanner.classList.add('show');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Auto update check error:', error);
+            }
+        }
+
+        // Install update from banner
+        async function installUpdate() {
+            try {
+                if (invoke) {
+                    const result = await invoke('install_update');
+                    alert(result);
+
+                    const updateBanner = document.getElementById('updateBanner');
+                    if (updateBanner) {
+                        updateBanner.classList.remove('show');
+                    }
+                }
+            } catch (error) {
+                console.error('Install update error:', error);
+                alert('更新中にエラーが発生しました: ' + error);
+            }
+        }
+
+        // Dismiss update banner
+        function dismissUpdate() {
+            const updateBanner = document.getElementById('updateBanner');
+            if (updateBanner) {
+                updateBanner.classList.remove('show');
             }
         }
 
@@ -1694,6 +1879,9 @@
                 if (loadingScreen) {
                     loadingScreen.classList.add('hidden');
                 }
+                
+                // Auto check for updates after loading
+                autoCheckUpdate();
             }, 1500);
         });
     </script>

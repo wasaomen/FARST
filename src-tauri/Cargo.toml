@@ -1,10 +1,10 @@
 [package]
 name = "toire"
-version = "0.1.0"
+version = "0.3.0"
 description = "TOIRE - ゲーマー特化軽量化ツール"
 authors = ["eleven"]
-license = ""
-repository = ""
+license = "MIT"
+repository = "https://github.com/wasaomen/FARST"
 edition = "2024"
 rust-version = "1.90"
 
