@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "TOIRE",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "identifier": "com.toire.app",
   "build": {
     "frontendDist": "../dist"
@@ -9,7 +9,7 @@
   "app": {
     "windows": [
       {
-        "title": "TOIRE - ゲーマー特化軽量化ツール",
+        "title": "TOIRE - System Optimizer",
         "width": 1400,
         "height": 900,
         "resizable": true,

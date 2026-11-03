@@ -49,25 +49,43 @@
         }
 
         .logo {
-            padding: 0 20px 30px;
-            border-bottom: 1px solid rgba(255, 51, 51, 0.2);
-            margin-bottom: 20px;
+            padding: 30px 20px 35px;
+            border-bottom: 1px solid rgba(255, 51, 51, 0.15);
+            margin-bottom: 25px;
+            position: relative;
+            background: linear-gradient(180deg, rgba(255, 51, 51, 0.05) 0%, transparent 100%);
         }
 
         .logo h1 {
-            font-size: 1.8em;
-            font-weight: 800;
-            color: #ff3333;
-            letter-spacing: 2px;
+            font-size: 2.2em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff3333 0%, #ff6666 50%, #ff3333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+            filter: drop-shadow(0 0 25px rgba(255, 51, 51, 0.4));
+            margin-bottom: 8px;
         }
 
         .logo p {
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 5px;
-            letter-spacing: 1px;
+            font-size: 0.75em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .logo-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ff3333 0%, #ff6666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 15px rgba(255, 51, 51, 0.5));
         }
 
         .nav-section {
@@ -826,8 +844,9 @@
     <!-- Sidebar -->
     <nav class="sidebar">
         <div class="logo">
+            <div class="logo-icon">⚡</div>
             <h1>TOIRE</h1>
-            <p>FPS Boost Tool</p>
+            <p>System Optimizer</p>
         </div>
 
         <div class="nav-section">

@@ -1,6 +1,6 @@
 [package]
 name = "toire"
-version = "0.3.0"
+version = "0.3.5"
 description = "TOIRE - ゲーマー特化軽量化ツール"
 authors = ["eleven"]
 license = "MIT"
