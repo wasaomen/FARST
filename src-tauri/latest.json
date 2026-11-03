@@ -4,7 +4,6 @@
   "pub_date": "2026-11-04T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSc3RVUCtBVjlDcS9qU01nZ3VhdHhTb0huQWF6ZFB4RHhEMDVPMU01QXdyeEVyWXF2amVxYU5qMnZOUzNkN3FjaHZFN3JtOSt2ZHlQb0tEWDgrcTlrazRqMk5SeUtFd3drPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkzNzQxNDU5CWZpbGU6VE9JUkVfMC4zLjVfeDY0LXNldHVwLmV4ZQl2ZXJzaW9uOjAuMy41CktCekJ4LzM5Q2p6WHNkalNkMGtadzB4NGZ5cU5sYTFrb3ZrQ3FiUjFReDdtMnNEU09IRkFyVnBvbVA4UktHUTNnRHREMDlwdVc2TWZEMnZoLy8zbkFBPT0K",
       "url": "https://github.com/wasaomen/FARST/releases/download/v0.3.5/TOIRE_0.3.5_x64-setup.exe"
     }
   }
