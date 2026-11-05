@@ -4,6 +4,7 @@
   "pub_date": "2026-11-04T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
+      "signature": "",
       "url": "https://github.com/wasaomen/FARST/releases/download/v0.3.5/TOIRE_0.3.5_x64-setup.exe"
     }
   }
