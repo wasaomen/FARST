@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero - System Optimizer</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Segoe UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+        background: #050507;
+        color: #eee;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero {
+        text-align: center;
+        padding: 100px 24px 60px;
+        max-width: 720px;
+    }
+    .logo {
+        font-size: 4em;
+        font-weight: 800;
+        letter-spacing: 6px;
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .tagline {
+        margin-top: 12px;
+        font-size: 1.2em;
+        color: rgba(255,255,255,0.6);
+        letter-spacing: 2px;
+    }
+    .desc {
+        margin-top: 28px;
+        color: rgba(255,255,255,0.55);
+        line-height: 1.9;
+        font-size: 0.95em;
+    }
+    .features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    .feature {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 14px;
+        padding: 18px 22px;
+        font-size: 0.9em;
+        color: rgba(255,255,255,0.8);
+    }
+    .feature b { color: #60a5fa; }
+    .cta {
+        margin-top: 56px;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 34px;
+        border-radius: 12px;
+        font-size: 1em;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform 0.15s, background 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: #3b82f6; color: #fff; }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-ghost { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+    .pricing {
+        margin-top: 70px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 560px;
+        width: 90%;
+        text-align: center;
+    }
+    .pricing h2 { font-size: 1.4em; margin-bottom: 8px; }
+    .pricing .price { font-size: 2.6em; font-weight: 800; color: #60a5fa; margin: 16px 0 4px; }
+    .pricing .price span { font-size: 0.5em; color: rgba(255,255,255,0.5); font-weight: 400; }
+    .pricing p { color: rgba(255,255,255,0.55); font-size: 0.9em; line-height: 1.8; }
+    footer {
+        margin-top: auto;
+        padding: 30px;
+        color: rgba(255,255,255,0.3);
+        font-size: 0.8em;
+    }
+</style>
+</head>
+<body>
+    <div class="hero">
+        <div class="logo">ZERO</div>
+        <div class="tagline">System Optimizer</div>
+        <p class="desc">
+            ゲーマーのための軽量・高速なWindows最適化ツール。<br>
+            メモリ解放、ネットワークブースト、不要ファイルのクリーンアップまでワンクリックで。
+        </p>
+        <div class="features">
+            <div class="feature"><b>Memory Cleaner</b><br>ワンクリックでメモリ解放</div>
+            <div class="feature"><b>Network Boost</b><br>Ping・レイテンシ改善</div>
+            <div class="feature"><b>Deep Clean</b><br>一時ファイル・キャッシュ削除</div>
+            <div class="feature"><b>Tweaks</b><br>ゲーム向けシステム設定</div>
+        </div>
+        <div class="cta">
+            <a class="btn btn-primary" href="https://github.com/wasaomen/FARST/releases/latest">今すぐダウンロード</a>
+            <a class="btn btn-ghost" href="https://discord.gg/yHrB7v66UV">Discordコミュニティ</a>
+        </div>
+    </div>
+
+    <div class="pricing">
+        <h2>Premium</h2>
+        <div class="price">¥500<span> / 月</span></div>
+        <p>
+            サブスクリプションで全機能を解放。<br>
+            解約はいつでも可能です。
+        </p>
+        <div class="cta" style="margin-top: 28px;">
+            <a class="btn btn-primary" href="#">購入する</a>
+        </div>
+    </div>
+
+    <footer>© 2026 Zero Project — <a href="https://github.com/wasaomen/FARST" style="color: rgba(255,255,255,0.4);">GitHub</a></footer>
+</body>
+</html>
