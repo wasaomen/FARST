@@ -1,7 +1,7 @@
 [package]
-name = "toire"
-version = "0.3.5"
-description = "TOIRE - ゲーマー特化軽量化ツール"
+name = "zero"
+version = "4.0.0"
+description = "Zero - ゲーマー特化軽量化ツール"
 authors = ["eleven"]
 license = "MIT"
 repository = "https://github.com/wasaomen/FARST"
@@ -11,7 +11,7 @@ rust-version = "1.90"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
-name = "toire_lib"
+name = "zero_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
@@ -25,4 +25,6 @@ tauri = { version = "2.12.5", features = [] }
 tauri-plugin-log = "2"
 tauri-plugin-updater = "2"
 sysinfo = "0.32"
+ureq = { version = "3", features = ["json"] }
+socket2 = "0.6"
 windows = { version = "0.58", features = ["Win32_Foundation", "Win32_System_Memory", "Win32_System_ProcessStatus", "Win32_System_Threading", "Win32_System_Diagnostics_Debug", "Win32_System_Diagnostics_ToolHelp"] }

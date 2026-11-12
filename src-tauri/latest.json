@@ -1,11 +1,11 @@
 {
-  "version": "0.3.5",
-  "notes": "UI改善 - ロゴとタイトルをスタイリッシュに更新",
-  "pub_date": "2026-11-04T00:00:00Z",
+  "version": "4.0.0",
+  "notes": "v4 - Discordログイン必須化・Premiumライセンス・新ロゴ/アイコン・GitHub連携廃止",
+  "pub_date": "2026-10-12T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "",
-      "url": "https://github.com/wasaomen/FARST/releases/download/v0.3.5/TOIRE_0.3.5_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSVGwzTEZrSW91VThudHNyYnBmQlIvWWcrSlFQNFB1K2toNmRYZlgwSzdTMlRzTHpCWG92ZHJTWmpUSGszWjlaOU0yQkFjQ3Q1WkZMdTIwYVlYWEl6QkZGL3RodmY5VFFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzk0NDgyNzQ0CWZpbGU6WmVyb180LjAuMF94NjQtc2V0dXAuZXhlCXZlcnNpb246NC4wLjAKUEZQZzhJMGpVOHVpRlJjQUJvaVhiZ0xQNG1hSnBZTytKUTdaZW1yZG43MmROTHJWc1pRVWlxajFRV1A3cFNNblhjYkRZUlgrcVJjRlBzbzBtRnpuRHc9PQo=",
+      "url": "https://github.com/wasaomen/FARST/releases/download/v4/Zero_4.0.0_x64-setup.exe"
     }
   }
 }

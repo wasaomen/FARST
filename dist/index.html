@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOIRE</title>
+    <title>Zero</title>
     <style>
         * {
             margin: 0;
@@ -13,11 +13,20 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #050505 0%, #0f0505 50%, #050505 100%);
-            color: #ffffff;
+            font-size: 15px;
+            line-height: 1.6;
+            background: #050507;
+            color: #f0f0f0;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             overflow: hidden;
+        }
+
+        .app-body {
+            display: flex;
+            flex: 1;
+            min-height: 0;
         }
 
         body::before {
@@ -27,9 +36,19 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 30% 50%, rgba(255, 51, 51, 0.08) 0%, transparent 60%),
-                        radial-gradient(circle at 70% 50%, rgba(255, 51, 51, 0.04) 0%, transparent 60%),
-                        radial-gradient(circle at 50% 30%, rgba(255, 51, 51, 0.03) 0%, transparent 50%);
+            background: none;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: none;
             pointer-events: none;
             z-index: 0;
         }
@@ -37,35 +56,37 @@
         /* Sidebar */
         .sidebar {
             width: 280px;
-            background: rgba(17, 17, 17, 0.9);
-            border-right: 1px solid rgba(255, 51, 51, 0.2);
+            background: rgba(14, 14, 18, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.04), 20px 0 60px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             padding: 20px 0;
             overflow-y: auto;
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(40px) saturate(1.5);
+            -webkit-backdrop-filter: blur(40px) saturate(1.5);
             position: relative;
             z-index: 10;
         }
 
         .logo {
             padding: 30px 20px 35px;
-            border-bottom: 1px solid rgba(255, 51, 51, 0.15);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.15);
             margin-bottom: 25px;
             position: relative;
-            background: linear-gradient(180deg, rgba(255, 51, 51, 0.05) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
         }
 
         .logo h1 {
             font-size: 2.2em;
             font-weight: 900;
-            background: linear-gradient(135deg, #ff3333 0%, #ff6666 50%, #ff3333 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #3b82f6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: 3px;
             text-transform: uppercase;
-            filter: drop-shadow(0 0 25px rgba(255, 51, 51, 0.4));
+            filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.4));
             margin-bottom: 8px;
         }
 
@@ -78,14 +99,24 @@
             font-weight: 600;
         }
 
+        .logo-img {
+            width: 76px;
+            height: 76px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin-bottom: 14px;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.35), 0 4px 16px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
         .logo-icon {
             font-size: 2.5em;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #ff3333 0%, #ff6666 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 15px rgba(255, 51, 51, 0.5));
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
         }
 
         .nav-section {
@@ -95,14 +126,16 @@
         .nav-section-title {
             padding: 0 20px 10px;
             font-size: 0.75em;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.6);
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
         }
 
         .nav-item {
-            padding: 12px 20px;
+            padding: 11px 18px;
+            margin: 2px 10px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -120,7 +153,7 @@
             top: 0;
             bottom: 0;
             width: 3px;
-            background: #ff3333;
+            background: #3b82f6;
             transform: scaleY(0);
             transition: transform 0.3s;
         }
@@ -131,13 +164,13 @@
         }
 
         .nav-item:hover {
-            background: rgba(255, 51, 51, 0.1);
+            background: rgba(59, 130, 246, 0.1);
             color: #fff;
         }
 
         .nav-item.active {
-            background: rgba(255, 51, 51, 0.15);
-            color: #ff3333;
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
         }
 
         .nav-item-content {
@@ -154,17 +187,17 @@
 
         .nav-item-count {
             font-size: 0.75em;
-            color: rgba(255, 255, 255, 0.4);
-            background: rgba(255, 51, 51, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(59, 130, 246, 0.1);
             padding: 2px 8px;
             border-radius: 10px;
-            border: 1px solid rgba(255, 51, 51, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
-            padding: 30px;
+            padding: 24px;
             overflow-y: auto;
             overflow-x: hidden;
             background: transparent;
@@ -185,8 +218,8 @@
         }
 
         .page-title p {
-            color: #666;
-            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95em;
         }
 
         /* Grid Layout */
@@ -207,20 +240,22 @@
 
         /* Cards */
         .card {
-            background: rgba(20, 20, 20, 0.75);
-            border: 1px solid rgba(255, 51, 51, 0.15);
-            border-radius: 12px;
-            padding: 24px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-top-color: rgba(255, 255, 255, 0.14);
+            border-radius: 18px;
+            padding: 26px;
             transition: all 0.3s;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 8px 32px rgba(0, 0, 0, 0.35);
         }
 
         .card:hover {
-            border-color: rgba(255, 51, 51, 0.3);
-            box-shadow: 0 8px 30px rgba(255, 51, 51, 0.15);
+            border-color: rgba(59, 130, 246, 0.35);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 12px 40px rgba(59, 130, 246, 0.12);
             transform: translateY(-2px);
-            background: rgba(20, 20, 20, 0.85);
+            background: rgba(255, 255, 255, 0.07);
         }
 
         .card-header {
@@ -237,7 +272,7 @@
         }
 
         .card-icon {
-            color: rgba(255, 51, 51, 0.6);
+            color: rgba(59, 130, 246, 0.6);
             font-size: 1.2em;
         }
 
@@ -261,28 +296,28 @@
 
         .gauge-bg {
             fill: none;
-            stroke: rgba(34, 34, 34, 0.5);
+            stroke: rgba(255, 255, 255, 0.09);
             stroke-width: 8;
         }
 
         .gauge-fill {
             fill: none;
-            stroke: #ff3333;
+            stroke: #3b82f6;
             stroke-width: 8;
             stroke-linecap: round;
             stroke-dasharray: 339.292;
             stroke-dashoffset: 339.292;
             transition: stroke-dashoffset 1s ease;
-            filter: drop-shadow(0 0 10px rgba(255, 51, 51, 0.5));
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
         }
 
         .gauge-fill.warning {
-            stroke: #ff6666;
+            stroke: #60a5fa;
         }
 
         .gauge-fill.danger {
-            stroke: #ff0000;
-            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.7));
+            stroke: #ef4444;
+            filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.7));
         }
 
         .gauge-value {
@@ -297,25 +332,25 @@
 
         .gauge-label {
             font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 10px;
         }
 
         .view-details-btn {
-            background: rgba(255, 51, 51, 0.1);
-            border: 1px solid rgba(255, 51, 51, 0.3);
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             color: rgba(255, 255, 255, 0.7);
             padding: 8px 20px;
-            border-radius: 6px;
+            border-radius: 20px;
             cursor: pointer;
             font-size: 0.85em;
             transition: all 0.2s;
         }
 
         .view-details-btn:hover {
-            background: rgba(255, 51, 51, 0.2);
+            background: rgba(59, 130, 246, 0.2);
             color: #fff;
-            border-color: rgba(255, 51, 51, 0.5);
+            border-color: rgba(59, 130, 246, 0.5);
         }
 
         /* Temperature Monitor */
@@ -331,9 +366,9 @@
 
         .temp-tab {
             padding: 8px 20px;
-            background: rgba(255, 51, 51, 0.1);
-            border: 1px solid rgba(255, 51, 51, 0.2);
-            border-radius: 6px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
             cursor: pointer;
             color: rgba(255, 255, 255, 0.6);
             font-size: 0.85em;
@@ -341,10 +376,10 @@
         }
 
         .temp-tab.active {
-            background: rgba(255, 51, 51, 0.3);
-            border-color: rgba(255, 51, 51, 0.5);
+            background: rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
             color: #fff;
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
         }
 
         .temp-display {
@@ -366,17 +401,17 @@
         }
 
         .temp-history {
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 0.9em;
         }
 
         .temp-graph {
             height: 100px;
-            background: rgba(26, 26, 26, 0.3);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 8px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 51, 51, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         .temp-graph svg {
@@ -386,9 +421,9 @@
 
         .temp-graph-line {
             fill: none;
-            stroke: rgba(255, 51, 51, 0.8);
+            stroke: rgba(59, 130, 246, 0.8);
             stroke-width: 2;
-            filter: drop-shadow(0 0 8px rgba(255, 51, 51, 0.4));
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
         }
 
         /* Windows Ascension Card */
@@ -399,20 +434,20 @@
         .ascension-status {
             display: inline-block;
             padding: 6px 16px;
-            background: rgba(255, 51, 51, 0.3);
-            border: 1px solid rgba(255, 51, 51, 0.5);
+            background: rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.5);
             border-radius: 20px;
             font-size: 0.75em;
             font-weight: 600;
             margin-bottom: 15px;
-            color: #ff3333;
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+            color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
         }
 
         .ascension-status.active {
-            background: rgba(255, 51, 51, 0.5);
+            background: rgba(59, 130, 246, 0.5);
             color: #fff;
-            box-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
         .ascension-description {
@@ -430,8 +465,8 @@
         .ascension-btn {
             flex: 1;
             padding: 12px;
-            border: 1px solid rgba(255, 51, 51, 0.2);
-            background: rgba(255, 51, 51, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            background: rgba(59, 130, 246, 0.1);
             color: rgba(255, 255, 255, 0.8);
             border-radius: 8px;
             cursor: pointer;
@@ -440,20 +475,20 @@
         }
 
         .ascension-btn:hover {
-            background: rgba(255, 51, 51, 0.2);
-            border-color: rgba(255, 51, 51, 0.4);
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.4);
             color: #fff;
         }
 
         .ascension-btn.primary {
-            background: rgba(255, 51, 51, 0.3);
-            border-color: rgba(255, 51, 51, 0.5);
+            background: rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
             color: #fff;
         }
 
         .ascension-btn.primary:hover {
-            background: rgba(255, 51, 51, 0.4);
-            box-shadow: 0 0 20px rgba(255, 51, 51, 0.3);
+            background: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
         /* Disk Card */
@@ -466,7 +501,7 @@
         }
 
         .disk-label {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.85em;
             margin-bottom: 5px;
         }
@@ -480,27 +515,27 @@
 
         .disk-bar {
             height: 8px;
-            background: rgba(26, 26, 26, 0.5);
+            background: rgba(0, 0, 0, 0.35);
             border-radius: 4px;
             overflow: hidden;
             margin-bottom: 15px;
-            border: 1px solid rgba(255, 51, 51, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .disk-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, rgba(255, 51, 51, 0.6), rgba(255, 102, 102, 0.8));
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.6), rgba(96, 165, 250, 0.8));
             border-radius: 4px;
             transition: width 0.5s;
-            box-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
         }
 
         .clean-btn {
             width: 100%;
-            padding: 12px;
-            background: rgba(255, 51, 51, 0.3);
-            border: 1px solid rgba(255, 51, 51, 0.5);
-            border-radius: 8px;
+            padding: 13px;
+            background: rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 14px;
             color: #fff;
             font-weight: 600;
             cursor: pointer;
@@ -508,8 +543,8 @@
         }
 
         .clean-btn:hover {
-            background: rgba(255, 51, 51, 0.4);
-            box-shadow: 0 0 20px rgba(255, 51, 51, 0.3);
+            background: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
         /* Action Buttons */
@@ -522,20 +557,23 @@
 
         .action-btn {
             padding: 20px;
-            background: rgba(20, 20, 20, 0.5);
-            border: 1px solid rgba(255, 51, 51, 0.1);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-top-color: rgba(255, 255, 255, 0.14);
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.3s;
             text-align: left;
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
         }
 
         .action-btn:hover {
-            border-color: rgba(255, 51, 51, 0.3);
-            background: rgba(255, 51, 51, 0.08);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(59, 130, 246, 0.08);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 51, 51, 0.1);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.1);
         }
 
         .action-btn h3 {
@@ -546,26 +584,28 @@
 
         .action-btn p {
             font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .action-btn.danger:hover {
-            border-color: rgba(255, 51, 51, 0.6);
+            border-color: rgba(59, 130, 246, 0.6);
         }
 
         .action-btn.success:hover {
-            border-color: rgba(255, 51, 51, 0.6);
+            border-color: rgba(59, 130, 246, 0.6);
         }
 
         /* Welcome Banner */
         .welcome-banner {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.5) 0%, rgba(20, 20, 20, 0.5) 100%);
-            border: 1px solid rgba(255, 51, 51, 0.15);
-            border-radius: 12px;
-            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top-color: rgba(255, 255, 255, 0.16);
+            border-radius: 18px;
+            padding: 32px;
             margin-bottom: 30px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .welcome-banner h2 {
@@ -573,7 +613,7 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(255, 51, 51, 0.3);
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
         .welcome-banner p {
@@ -587,16 +627,16 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(10, 10, 10, 0.3);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 51, 51, 0.3);
+            background: rgba(59, 130, 246, 0.3);
             border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 51, 51, 0.5);
+            background: rgba(59, 130, 246, 0.5);
         }
 
         /* Process List */
@@ -609,16 +649,16 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px;
-            background: rgba(26, 26, 26, 0.5);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.045);
+            border-radius: 14px;
             margin-bottom: 10px;
-            border: 1px solid rgba(255, 51, 51, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s;
         }
 
         .process-item:hover {
-            border-color: rgba(255, 51, 51, 0.3);
-            background: rgba(26, 26, 26, 0.7);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .process-name {
@@ -627,7 +667,7 @@
         }
 
         .process-memory {
-            color: #ff3333;
+            color: #3b82f6;
             font-weight: 700;
         }
 
@@ -640,101 +680,20 @@
             display: block;
         }
 
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #050505 0%, #0f0505 50%, #050505 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loading-logo {
-            font-size: 4em;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ff3333 0%, #ff6666 50%, #ff3333 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 8px;
-            margin-bottom: 30px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(0.98); }
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(255, 51, 51, 0.2);
-            border-top: 3px solid #ff3333;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1em;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .loading-progress {
-            width: 200px;
-            height: 3px;
-            background: rgba(255, 51, 51, 0.2);
-            border-radius: 2px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-
-        .loading-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #ff3333, #ff6666);
-            border-radius: 2px;
-            animation: progress 2s ease-in-out infinite;
-        }
-
-        @keyframes progress {
-            0% { width: 0%; }
-            50% { width: 70%; }
-            100% { width: 100%; }
-        }
 
         /* Update Notification Banner */
         .update-banner {
             position: fixed;
-            top: 20px;
+            top: 62px;
             right: 20px;
-            background: linear-gradient(135deg, rgba(255, 51, 51, 0.9) 0%, rgba(255, 102, 102, 0.9) 100%);
-            border: 1px solid rgba(255, 51, 51, 0.5);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(96, 165, 250, 0.9) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.5);
             border-radius: 12px;
             padding: 20px;
             z-index: 10000;
             display: none;
             backdrop-filter: blur(20px);
-            box-shadow: 0 8px 30px rgba(255, 51, 51, 0.4);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
             max-width: 350px;
             animation: slideIn 0.5s ease;
         }
@@ -786,7 +745,7 @@
 
         .update-banner-btn.primary {
             background: #fff;
-            color: #ff3333;
+            color: #3b82f6;
         }
 
         .update-banner-btn.primary:hover {
@@ -818,15 +777,904 @@
         .update-close:hover {
             color: #fff;
         }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10001;
+            pointer-events: none;
+        }
+
+        .toast {
+            pointer-events: auto;
+            min-width: 280px;
+            max-width: 420px;
+            padding: 14px 18px;
+            background: rgba(12, 12, 18, 0.95);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            border-left: 3px solid #3b82f6;
+            border-radius: 14px;
+            color: #f0f0f0;
+            font-size: 0.9em;
+            line-height: 1.5;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            animation: toastIn 0.3s cubic-bezier(0.2, 0.8, 0.3, 1);
+        }
+
+        .toast.success {
+            border-left-color: #60a5fa;
+        }
+
+        .toast.error {
+            border-left-color: #ef4444;
+        }
+
+        .toast.info {
+            border-left-color: rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes toastIn {
+            from {
+                transform: translateX(40px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.hiding {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateX(40px);
+        }
+
+        /* Result badge for tweak items */
+        .tweak-badge {
+            font-size: 0.7em;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 3px 10px;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            color: #60a5fa;
+        }
+
+        /* =========================================================
+           UI Refresh — 丸み強化 & 可読性向上
+           ========================================================= */
+        body {
+            font-size: 16px;
+        }
+
+        /* Sidebar: 浮遊パネル風 */
+        .sidebar {
+            width: 292px;
+            margin: 14px 0 14px 14px;
+            height: calc(100vh - 70px);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .logo {
+            padding: 36px 24px 30px;
+            border-bottom: none;
+            margin-bottom: 20px;
+            background: none;
+            text-align: center;
+        }
+
+        .logo-img {
+            width: 88px;
+            height: 88px;
+            border-radius: 26px;
+            margin-bottom: 16px;
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
+        }
+
+        .logo h1 {
+            font-size: 2.1em;
+            letter-spacing: 6px;
+        }
+
+        .logo p {
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 3px;
+        }
+
+        .nav-section {
+            margin-bottom: 26px;
+        }
+
+        .nav-section-title {
+            padding: 0 24px 10px;
+            font-size: 0.78em;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 2px;
+        }
+
+        .nav-item {
+            margin: 4px 14px;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 0.95em;
+            color: rgba(255, 255, 255, 0.78);
+            gap: 4px;
+        }
+
+        .nav-item::before {
+            display: none;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
+            transform: translateX(3px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.95) 0%, rgba(96, 165, 250, 0.8) 100%);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+        }
+
+        .nav-item-icon {
+            width: 22px;
+            font-size: 1.05em;
+            opacity: 0.9;
+        }
+
+        .nav-item-count {
+            font-size: 0.78em;
+            border-radius: 999px;
+            padding: 3px 10px;
+        }
+
+        /* Main content */
+        .main-content {
+            padding: 30px 36px;
+        }
+
+        .page-title {
+            margin-bottom: 32px;
+        }
+
+        .page-title h1 {
+            font-size: 2.1em;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .page-title p {
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.72);
+            margin-top: 4px;
+        }
+
+        /* Cards: より大きな角丸・クリアな背景 */
+        .card {
+            border-radius: 26px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.055);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .card-title {
+            font-size: 1.15em;
+            font-weight: 700;
+        }
+
+        /* Gauges */
+        .gauge {
+            width: 148px;
+            height: 148px;
+            margin-bottom: 18px;
+        }
+
+        .gauge-svg {
+            width: 148px;
+            height: 148px;
+        }
+
+        .gauge-fill {
+            stroke-width: 10;
+        }
+
+        .gauge-bg {
+            stroke-width: 10;
+        }
+
+        .gauge-value {
+            font-size: 1.75em;
+        }
+
+        .gauge-label {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 14px;
+        }
+
+        /* Buttons: ピル型 */
+        .view-details-btn {
+            border-radius: 999px;
+            padding: 10px 24px;
+            font-size: 0.9em;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .view-details-btn:hover {
+            background: rgba(59, 130, 246, 0.18);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .clean-btn {
+            border-radius: 20px;
+            padding: 15px;
+            font-size: 0.95em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .temp-tab {
+            border-radius: 999px;
+            padding: 10px 24px;
+            font-size: 0.9em;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .temp-tab.active {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(96, 165, 250, 0.75));
+            border-color: transparent;
+            box-shadow: 0 4px 18px rgba(59, 130, 246, 0.35);
+        }
+
+        .temp-current {
+            font-size: 3.4em;
+        }
+
+        .temp-history {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .temp-graph {
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Ascension / misc cards */
+        .ascension-status {
+            border-radius: 999px;
+            padding: 8px 20px;
+            font-size: 0.8em;
+        }
+
+        .ascension-description {
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .ascension-btn {
+            border-radius: 16px;
+            padding: 14px;
+            font-size: 0.92em;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .ascension-btn.primary {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(96, 165, 250, 0.75));
+            border-color: transparent;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Disk card */
+        .disk-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .disk-bar {
+            height: 10px;
+            border-radius: 999px;
+        }
+
+        /* Action buttons */
+        .action-btn {
+            border-radius: 22px;
+            padding: 24px;
+        }
+
+        .action-btn h3 {
+            font-size: 1.05em;
+        }
+
+        .action-btn p {
+            color: rgba(255, 255, 255, 0.68);
+        }
+
+        /* Welcome banner */
+        .welcome-banner {
+            border-radius: 30px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(255, 255, 255, 0.04) 60%);
+        }
+
+        .welcome-banner h2 {
+            font-size: 2.1em;
+            letter-spacing: 1px;
+        }
+
+        .welcome-banner p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1.02em;
+        }
+
+        /* Process list */
+        .process-item {
+            border-radius: 18px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .process-item:hover {
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        /* Page transition */
+        .page-section.active {
+            animation: pageIn 0.35s cubic-bezier(0.2, 0.8, 0.3, 1);
+        }
+
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Update banner */
+        .update-banner {
+            border-radius: 22px;
+            padding: 24px;
+        }
+
+        .update-banner-btn {
+            border-radius: 999px;
+            padding: 12px 18px;
+            font-weight: 700;
+        }
+
+        /* Toast */
+        .toast {
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 15px 20px;
+            font-size: 0.92em;
+        }
+
+        /* tweak-badge */
+        .tweak-badge {
+            border-radius: 999px;
+            padding: 4px 12px;
+        }
+
+        /* Scrollbar: より丸く */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 999px;
+        }
+
+        /* Title Bar */
+        .titlebar {
+            height: 42px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: stretch;
+            background: rgba(8, 8, 12, 0.92);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: relative;
+            z-index: 10002;
+        }
+
+        .titlebar-drag {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 18px;
+            min-width: 0;
+            user-select: none;
+        }
+
+        .titlebar-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 7px;
+            object-fit: cover;
+        }
+
+        .titlebar-name {
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            color: #fff;
+            font-size: 0.95em;
+        }
+
+        .titlebar-sub {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.78em;
+            letter-spacing: 1px;
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            padding-left: 10px;
+        }
+
+        .titlebar-controls {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .tb-btn {
+            width: 48px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tb-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+
+        .tb-close:hover {
+            background: #e81123;
+            color: #fff;
+        }
+
+        /* Trailer Overlay */
+        .trailer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10003;
+        }
+
+        .trailer-overlay.show {
+            display: flex;
+        }
+
+        .trailer-box {
+            position: relative;
+            width: min(960px, 88vw);
+        }
+
+        .trailer-box video {
+            width: 100%;
+            border-radius: 16px;
+            display: block;
+            background: #000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .trailer-close {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: #1a1a22;
+            color: #fff;
+            font-size: 1.2em;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .trailer-close:hover {
+            background: #e81123;
+        }
+
+        /* Login Gate */
+        .login-gate {
+            position: fixed;
+            top: 42px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(5, 5, 7, 0.97);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10004;
+        }
+
+        .login-gate.show {
+            display: flex;
+        }
+
+        .gate-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 48px 56px;
+            text-align: center;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+            max-width: 420px;
+        }
+
+        .gate-logo {
+            width: 88px;
+            height: 88px;
+            border-radius: 24px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .gate-card h2 {
+            color: #fff;
+            font-size: 1.7em;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 6px;
+        }
+
+        .gate-sub {
+            color: #5865f2;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .gate-desc {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .gate-discord-btn {
+            background: #5865f2;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 34px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.15s;
+        }
+
+        .gate-discord-btn:hover {
+            background: #4752c4;
+        }
+
+        .gate-status {
+            margin-top: 18px;
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.6);
+            min-height: 1.2em;
+        }
+
+        .gate-status.error {
+            color: #ff7b7b;
+        }
+
+        /* Account / Discord連携 */
+        .dc-card {
+            text-align: center;
+            padding: 32px 24px;
+        }
+
+        .dc-hero-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 18px;
+            border-radius: 18px;
+            background: #5865f2;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(88, 101, 242, 0.35);
+        }
+
+        .dc-desc {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.9em;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .dc-login-btn {
+            width: 100%;
+            background: #5865f2;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 13px 20px;
+            font-size: 0.95em;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.15s;
+        }
+
+        .dc-login-btn:hover {
+            background: #4752c4;
+        }
+
+        .dc-login-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .dc-login-status {
+            margin-top: 14px;
+            font-size: 0.82em;
+            color: rgba(255, 255, 255, 0.55);
+            min-height: 1.2em;
+        }
+
+        .dc-login-status.error {
+            color: #ff7b7b;
+        }
+
+        .dc-profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .dc-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 3px solid #5865f2;
+            flex-shrink: 0;
+        }
+
+        .dc-profile-info {
+            min-width: 0;
+        }
+
+        .dc-name {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: #fff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dc-status {
+            margin-top: 4px;
+            font-size: 0.82em;
+            color: #3ddc84;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dc-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #23a559;
+            display: inline-block;
+        }
+
+        .dc-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dc-join-btn {
+            flex: 1;
+            background: #5865f2;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 11px 16px;
+            font-size: 0.88em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .dc-join-btn:hover {
+            background: #4752c4;
+        }
+
+        .dc-logout-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 11px 16px;
+            font-size: 0.88em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .dc-logout-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+
+        .dc-server-card {
+            margin-top: 20px;
+        }
+
+        .dc-server-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .dc-server-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(88, 101, 242, 0.15);
+            border: 1px solid rgba(88, 101, 242, 0.4);
+            color: #8b96f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .dc-server-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .dc-server-title {
+            font-size: 1.05em;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .dc-server-sub {
+            font-size: 0.78em;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        .dc-server-stats {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .dc-stat {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.75);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dc-stat-icon {
+            font-size: 1.05em;
+        }
+
+        .lic-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            color: #fff;
+            padding: 12px 14px;
+            font-size: 0.95em;
+            font-family: monospace;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 12px;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .lic-input:focus {
+            border-color: #5865f2;
+        }
+
+        .lic-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .lic-active-icon {
+            background: linear-gradient(135deg, #f5c542, #e8a020);
+            box-shadow: 0 8px 24px rgba(245, 197, 66, 0.3);
+        }
+
+        /* 軽量化: アニメーションをすべて無効化 */
+        *, *::before, *::after {
+            animation: none !important;
+        }
+
+        /* 起動時のフェードインのみ */
+        @keyframes appFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .titlebar, .app-body {
+            animation: appFadeIn 0.4s ease-out !important;
+        }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Loading...</div>
-        <div class="loading-progress">
-            <div class="loading-progress-bar"></div>
+    <!-- Title Bar -->
+    <div class="titlebar">
+        <div class="titlebar-drag">
+            <img src="logo.png" class="titlebar-logo" alt="Zero">
+            <span class="titlebar-name">ZERO</span>
+            <span class="titlebar-sub">System Optimizer</span>
+        </div>
+        <div class="titlebar-controls">
+            <button class="tb-btn" id="tbMinimize" title="最小化">&ndash;</button>
+            <button class="tb-btn tb-close" id="tbClose" title="閉じる">&times;</button>
         </div>
     </div>
 
@@ -841,20 +1689,15 @@
         </div>
     </div>
 
+    <div class="app-body">
     <!-- Sidebar -->
     <nav class="sidebar">
-        <div class="logo">
-            <div class="logo-icon">⚡</div>
-            <h1>TOIRE</h1>
-            <p>System Optimizer</p>
-        </div>
-
         <div class="nav-section">
             <div class="nav-section-title">General</div>
             <div class="nav-item active" data-page="home">
                 <div class="nav-item-content">
                     <span class="nav-item-icon">●</span>
-                    <span>Home</span>
+                    <span>Dashboard</span>
                 </div>
             </div>
             <div class="nav-item" data-page="memory-cleaner">
@@ -881,6 +1724,12 @@
                     <span>Fixes</span>
                 </div>
             </div>
+            <div class="nav-item" data-page="scheduler">
+                <div class="nav-item-content">
+                    <span class="nav-item-icon">⏱</span>
+                    <span>Scheduler</span>
+                </div>
+            </div>
         </div>
 
         <div class="nav-section">
@@ -889,6 +1738,12 @@
                 <div class="nav-item-content">
                     <span class="nav-item-icon">⬆</span>
                     <span>Check for Updates</span>
+                </div>
+            </div>
+            <div class="nav-item" onclick="openTrailer()">
+                <div class="nav-item-content">
+                    <span class="nav-item-icon">▶</span>
+                    <span>トレーラー</span>
                 </div>
             </div>
         </div>
@@ -936,6 +1791,16 @@
                 </div>
             </div>
         </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Account</div>
+            <div class="nav-item" data-page="account">
+                <div class="nav-item-content">
+                    <span class="nav-item-icon">⛁</span>
+                    <span>Account</span>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <!-- Main Content -->
@@ -974,15 +1839,15 @@
                     <div class="card-title">Memory Usage Details</div>
                 </div>
                 <div style="margin-bottom: 20px;">
-                    <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Total Memory</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Total Memory</div>
                     <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="cleanerTotalMemory">16 GB</div>
                 </div>
                 <div style="margin-bottom: 20px;">
-                    <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Used Memory</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Used Memory</div>
                     <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="cleanerUsedMemory">8.5 GB</div>
                 </div>
                 <div style="margin-bottom: 20px;">
-                    <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Free Memory</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Free Memory</div>
                     <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="cleanerFreeMemory">7.5 GB</div>
                 </div>
                 <div class="disk-bar">
@@ -998,19 +1863,14 @@
             </div>
         </section>
 
-        <!-- Home Page -->
+        <!-- Dashboard Page -->
         <section class="page-section active" id="home">
             <div class="page-title">
-                <h1>Home</h1>
-                <p>made by eleven</p>
+                <h1>Dashboard</h1>
+                <p>システム状態とクイックアクション</p>
             </div>
 
-            <div class="welcome-banner">
-                <h2>TOIRE</h2>
-                <p>ゲーマー特化軽量化ツール - システムを最適化して最大のパフォーマンスを引き出します</p>
-            </div>
-
-            <div class="grid grid-3">
+            <div class="grid grid-2">
                 <!-- CPU Gauge -->
                 <div class="card">
                     <div class="card-header">
@@ -1025,25 +1885,7 @@
                             <div class="gauge-value" id="cpuValue">35%</div>
                         </div>
                         <div class="gauge-label">CPU Usage</div>
-                        <button class="view-details-btn">View Details</button>
-                    </div>
-                </div>
 
-                <!-- GPU Gauge -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">GPU Usage</div>
-                    </div>
-                    <div class="gauge-container">
-                        <div class="gauge">
-                            <svg class="gauge-svg" width="120" height="120" viewBox="0 0 120 120">
-                                <circle class="gauge-bg" cx="60" cy="60" r="54"/>
-                                <circle class="gauge-fill" id="gpuGauge" cx="60" cy="60" r="54"/>
-                            </svg>
-                            <div class="gauge-value" id="gpuValue">8%</div>
-                        </div>
-                        <div class="gauge-label">GPU Usage</div>
-                        <button class="view-details-btn">View Details</button>
                     </div>
                 </div>
 
@@ -1061,7 +1903,7 @@
                             <div class="gauge-value" id="ramValue">28%</div>
                         </div>
                         <div class="gauge-label">RAM Usage</div>
-                        <button class="view-details-btn">View Details</button>
+
                     </div>
                 </div>
             </div>
@@ -1074,7 +1916,6 @@
                     </div>
                     <div class="temp-tabs">
                         <div class="temp-tab active" data-temp="cpu">CPU</div>
-                        <div class="temp-tab" data-temp="gpu">GPU</div>
                     </div>
                     <div class="temp-display">
                         <div>
@@ -1098,13 +1939,8 @@
                         <div class="card-title">System Optimization</div>
                     </div>
                     <div class="ascension-status" id="ascensionStatus">INACTIVE</div>
-                    <div class="ascension-description">
-                        システムリソースを最適化して最大のパフォーマンスを引き出します
-                    </div>
                     <div class="ascension-actions">
-                        <button class="ascension-btn primary" onclick="toggleOptimization()">Activate</button>
-                        <button class="ascension-btn">Learn More</button>
-                        <button class="ascension-btn">Configure</button>
+                        <button class="ascension-btn primary" onclick="toggleOptimization()">Optimize Now</button>
                     </div>
                 </div>
             </div>
@@ -1122,7 +1958,10 @@
                             <div class="disk-bar-fill" id="diskBar" style="width: 49%"></div>
                         </div>
                     </div>
-                    <button class="clean-btn" onclick="cleanDisk()">Clean up files</button>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="clean-btn" onclick="cleanDisk()" style="flex: 1;">Clean up files</button>
+                        <button class="clean-btn" onclick="cleanDiskDeep()" style="flex: 1; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2);">Deep Clean</button>
+                    </div>
                 </div>
 
                 <!-- Quick Actions -->
@@ -1177,11 +2016,11 @@
                     <div id="restorePointsList">
                         <div class="process-item">
                             <span class="process-name">Manual Restore Point</span>
-                            <span style="color: rgba(255,255,255,0.4);">2026-11-01</span>
+                            <span style="color: rgba(255,255,255,0.6);">2026-11-01</span>
                         </div>
                         <div class="process-item">
                             <span class="process-name">System Update</span>
-                            <span style="color: rgba(255,255,255,0.4);">2026-10-30</span>
+                            <span style="color: rgba(255,255,255,0.6);">2026-10-30</span>
                         </div>
                     </div>
                 </div>
@@ -1201,16 +2040,16 @@
                         <div class="card-title">CPU Details</div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Cores</div>
-                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;">8</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">CPU</div>
+                        <div style="font-size: 1.1em; font-weight: 700; color: #fff; word-break: break-all;" id="cpuName">-</div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Threads</div>
-                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;">16</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Cores / Threads</div>
+                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;"><span id="cpuCores">-</span> / <span id="cpuThreads">-</span></div>
                     </div>
                     <div>
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Base Clock</div>
-                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;">3.2 GHz</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Usage</div>
+                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="cpuUsageDetail">-</div>
                     </div>
                 </div>
 
@@ -1219,34 +2058,34 @@
                         <div class="card-title">Memory Details</div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Total RAM</div>
-                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="totalRam">16 GB</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Total RAM</div>
+                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="totalRam">-</div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Available</div>
-                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="availableRam">11.5 GB</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Available</div>
+                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="availableRam">-</div>
                     </div>
                     <div>
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Speed</div>
-                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;">3200 MHz</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Used</div>
+                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="usedRam">-</div>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">GPU Details</div>
+                        <div class="card-title">System</div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">VRAM</div>
-                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;">8 GB</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">OS</div>
+                        <div style="font-size: 1.1em; font-weight: 700; color: #fff; word-break: break-all;" id="osName">-</div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Driver Version</div>
-                        <div style="font-size: 1.2em; font-weight: 700; color: #fff;">537.58</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Kernel</div>
+                        <div style="font-size: 1.1em; font-weight: 700; color: #fff;" id="osVersion">-</div>
                     </div>
                     <div>
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-bottom: 5px;">Temperature</div>
-                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;">45°C</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">Uptime</div>
+                        <div style="font-size: 1.5em; font-weight: 700; color: #fff;" id="uptime">-</div>
                     </div>
                 </div>
             </div>
@@ -1306,6 +2145,26 @@
                     </p>
                     <button class="clean-btn" onclick="repairDisk()">Repair Disk</button>
                 </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Deep Disk Clean</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                        Windows Updateキャッシュ・ログ・ブラウザキャッシュ・ごみ箱まで削除します
+                    </p>
+                    <button class="clean-btn" onclick="cleanDiskDeep()">Deep Clean</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Registry Cleaner</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                        最近使ったファイル履歴・MRU・アクティビティ履歴をクリアします（安全な項目のみ）
+                    </p>
+                    <button class="clean-btn" onclick="registryClean()">Clean Registry</button>
+                </div>
             </div>
         </section>
 
@@ -1324,16 +2183,16 @@
                     <div class="process-item">
                         <div>
                             <div class="process-name">Disable Windows Search</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">検索インデックスを無効化してリソースを節約</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">検索インデックスを無効化してリソースを節約</div>
                         </div>
-                        <button class="view-details-btn" onclick="toggleTweak(this)">Apply</button>
+                        <button class="view-details-btn" onclick="toggleTweak(this, 'disable-windows-search')">Apply</button>
                     </div>
                     <div class="process-item">
                         <div>
                             <div class="process-name">Disable Superfetch</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">プリフェッチサービスを無効化</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">プリフェッチサービスを無効化</div>
                         </div>
-                        <button class="view-details-btn" onclick="toggleTweak(this)">Apply</button>
+                        <button class="view-details-btn" onclick="toggleTweak(this, 'disable-superfetch')">Apply</button>
                     </div>
                 </div>
             </div>
@@ -1354,23 +2213,23 @@
                     <div class="process-item">
                         <div>
                             <div class="process-name">Cortana</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">Microsoft Cortanaアシスタント</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">Microsoft Cortanaアシスタント</div>
                         </div>
-                        <button class="view-details-btn" onclick="toggleTweak(this)">Remove</button>
+                        <button class="view-details-btn" onclick="toggleTweak(this, 'remove-cortana')">Remove</button>
                     </div>
                     <div class="process-item">
                         <div>
                             <div class="process-name">Xbox Game Bar</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">ゲーム録画・ストリーミングツール</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">ゲーム録画・ストリーミングツール</div>
                         </div>
-                        <button class="view-details-btn" onclick="toggleTweak(this)">Remove</button>
+                        <button class="view-details-btn" onclick="toggleTweak(this, 'disable-game-bar')">Remove</button>
                     </div>
                     <div class="process-item">
                         <div>
                             <div class="process-name">Windows Tips</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">Windowsのヒントと通知</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">Windowsのヒントと通知</div>
                         </div>
-                        <button class="view-details-btn" onclick="toggleTweak(this)">Remove</button>
+                        <button class="view-details-btn" onclick="toggleTweak(this, 'remove-windows-tips')">Remove</button>
                     </div>
                 </div>
             </div>
@@ -1391,16 +2250,37 @@
                     <div class="process-item">
                         <div>
                             <div class="process-name">Disable Nagle's Algorithm</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">レイテンシを削減</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">レイテンシを削減 (TCPNoDelay / TcpAckFrequency)</div>
                         </div>
-                        <button class="view-details-btn" onclick="toggleTweak(this)">Apply</button>
+                        <button class="view-details-btn" onclick="applyNetworkTweaks(this)">Apply</button>
                     </div>
                     <div class="process-item">
                         <div>
                             <div class="process-name">Optimize TCP/IP Settings</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">TCP/IPパラメータを最適化</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">TCP autotuning / ECN / timestamps を最適化</div>
                         </div>
-                        <button class="view-details-btn" onclick="toggleTweak(this)">Apply</button>
+                        <button class="view-details-btn" onclick="applyNetworkTweaks(this)">Apply</button>
+                    </div>
+                    <div class="process-item">
+                        <div>
+                            <div class="process-name">Disable Network Throttling</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">マルチメディアプロファイルでゲーム優先度を最大化</div>
+                        </div>
+                        <button class="view-details-btn" onclick="applyNetworkTweaks(this)">Apply</button>
+                    </div>
+                    <div class="process-item">
+                        <div>
+                            <div class="process-name">Ping Test (Latency Check)</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">1.1.1.1 へのpingでレイテンシを計測</div>
+                        </div>
+                        <button class="view-details-btn" onclick="runPingTest()">Test</button>
+                    </div>
+                    <div class="process-item">
+                        <div>
+                            <div class="process-name">Poor Connection Boost</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">悪い回線向け: CTCP / EEE無効化 / Game Mode / DoSvc停止</div>
+                        </div>
+                        <button class="view-details-btn" onclick="boostNetwork()">Boost</button>
                     </div>
                 </div>
             </div>
@@ -1421,23 +2301,23 @@
                     <div class="process-item">
                         <div>
                             <div class="process-name">Disable Hibernation</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">休止状態を無効化してディスク容量を節約</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">休止状態を無効化してディスク容量を節約</div>
                         </div>
-                        <button class="view-details-btn" style="background: rgba(255,51,51,0.3); border-color: rgba(255,51,51,0.5);">Applied</button>
+                        <button class="view-details-btn" onclick="toggleTweak(this, 'disable-hibernation')">Apply</button>
                     </div>
                     <div class="process-item">
                         <div>
                             <div class="process-name">Disable Windows Error Reporting</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">エラーレポートを無効化</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">エラーレポートを無効化</div>
                         </div>
-                        <button class="view-details-btn" onclick="toggleTweak(this)">Apply</button>
+                        <button class="view-details-btn" onclick="toggleTweak(this, 'disable-error-reporting')">Apply</button>
                     </div>
                     <div class="process-item">
                         <div>
                             <div class="process-name">Disable Telemetry</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">テレメトリデータ収集を無効化</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">テレメトリデータ収集を無効化</div>
                         </div>
-                        <button class="view-details-btn" onclick="toggleTweak(this)">Apply</button>
+                        <button class="view-details-btn" onclick="toggleTweak(this, 'disable-telemetry')">Apply</button>
                     </div>
                 </div>
             </div>
@@ -1491,6 +2371,21 @@
                     <button class="clean-btn" onclick="createCustomProfile()">Create Custom Profile</button>
                 </div>
             </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <div class="card-title">Game Auto Detect</div>
+                </div>
+                <label style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; cursor: pointer; color: rgba(255,255,255,0.8);">
+                    <input type="checkbox" id="gameAutoDetect" onchange="toggleGameAutoDetect()" style="width: 18px; height: 18px; accent-color: #3b82f6;">
+                    <span>ゲーム検出時に自動でCompetitiveプロファイルを適用する</span>
+                </label>
+                <div id="detectedGamesList">
+                    <div class="process-item">
+                        <span class="process-name" style="color: rgba(255,255,255,0.5);">検出中...</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Tweaks - App Optimizer -->
@@ -1506,33 +2401,299 @@
                 </div>
                 <div id="startupAppsList">
                     <div class="process-item">
-                        <div>
-                            <div class="process-name">Discord</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">Discord通信アプリ</div>
-                        </div>
-                        <button class="view-details-btn" onclick="toggleStartup(this)">Disable</button>
-                    </div>
-                    <div class="process-item">
-                        <div>
-                            <div class="process-name">Steam</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">Steamゲームプラットフォーム</div>
-                        </div>
-                        <button class="view-details-btn" onclick="toggleStartup(this)">Disable</button>
-                    </div>
-                    <div class="process-item">
-                        <div>
-                            <div class="process-name">Spotify</div>
-                            <div style="color: rgba(255,255,255,0.4); font-size: 0.85em;">Spotify音楽ストリーミング</div>
-                        </div>
-                        <button class="view-details-btn" onclick="toggleStartup(this)">Disable</button>
+                        <span class="process-name" style="color: rgba(255,255,255,0.5);">読み込み中...</span>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Scheduler Page -->
+        <section class="page-section" id="scheduler">
+            <div class="page-title">
+                <h1>Scheduler</h1>
+                <p>自動最適化のスケジュール設定（アプリ起動中のみ動作）</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Schedule Settings</div>
+                    </div>
+                    <label style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; cursor: pointer; color: rgba(255,255,255,0.8);">
+                        <input type="checkbox" id="schedEnabled" onchange="saveSchedulerSettings()" style="width: 18px; height: 18px; accent-color: #3b82f6;">
+                        <span>スケジュールを有効化</span>
+                    </label>
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 8px;">実行時刻</div>
+                        <input type="time" id="schedTime" onchange="saveSchedulerSettings()" style="width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; color: #fff; font-size: 1em;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 8px;">実行内容</div>
+                        <select id="schedAction" onchange="saveSchedulerSettings()" style="width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; color: #fff; font-size: 1em;">
+                            <option value="optimize">最適化（メモリ解放 + ネットワーク最適化）</option>
+                            <option value="clean">ディスククリーン（通常 + 詳細）</option>
+                            <option value="boost">回線ブースト</option>
+                        </select>
+                    </div>
+                    <button class="clean-btn" onclick="runSchedulerNow()">今すぐ実行</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Status</div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">次回実行</div>
+                        <div style="font-size: 1.2em; font-weight: 700; color: #fff;" id="schedNext">-</div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 5px;">最終実行</div>
+                        <div style="font-size: 1.2em; font-weight: 700; color: #fff;" id="schedLast">-</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.55); font-size: 0.85em; line-height: 1.6;">
+                        ※ スケジューラはZeroアプリが起動している間のみ動作します。PC起動時の自動実行には対応していません。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Page -->
+        <section class="page-section" id="account">
+            <div class="page-title">
+                <h1>Account</h1>
+                <p>Discordアカウント連携</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card dc-card" id="dcLoggedOutCard">
+                    <div class="dc-hero-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+                    </div>
+                    <div class="card-title">Discord連携</div>
+                    <p class="dc-desc">
+                        Discordアカウントでログインすると、Zeroの全機能が利用できます。
+                    </p>
+                    <button class="dc-login-btn" id="dcLoginBtn" onclick="startDiscordLogin()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+                        Discordでログイン
+                    </button>
+                    <p id="dcLoginStatus" class="dc-login-status">ブラウザで認証を完了してください...</p>
+                </div>
+
+                <div class="card dc-card" id="dcLoggedInCard" style="display: none;">
+                    <div class="dc-profile">
+                        <img id="dcAvatar" class="dc-avatar" src="" alt="">
+                        <div class="dc-profile-info">
+                            <div class="dc-name" id="dcLoginName">-</div>
+                            <div class="dc-status"><span class="dc-dot"></span>連携済み</div>
+                        </div>
+                    </div>
+                    <div class="dc-actions">
+                        <button class="dc-join-btn" onclick="discordJoinServer()">サーバーに参加</button>
+                        <button class="dc-logout-btn" onclick="discordLogout()">ログアウト</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card dc-server-card">
+                <div class="dc-server-head">
+                    <div class="dc-server-icon" id="dcServerIcon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4 7.2 16.9l.9-5.4L4.2 7.7l5.4-.8L12 2z"/></svg>
+                    </div>
+                    <div>
+                        <div class="dc-server-title" id="dcServerName">Discordサーバー</div>
+                        <div class="dc-server-sub">コミュニティ</div>
+                    </div>
+                </div>
+                <div class="dc-server-stats">
+                    <div class="dc-stat">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                        <span id="dcServerMembers">-</span>
+                    </div>
+                    <button class="dc-join-btn" onclick="discordJoinServer()">招待リンクを開く</button>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <div class="card-title">Premiumライセンス</div>
+                </div>
+                <div id="licInactive">
+                    <p class="dc-desc">
+                        Zeroの最適化・クリーン・修復などの全機能を利用するには、Premiumサブスクリプションが必要です。
+                    </p>
+                    <input type="text" id="licKeyInput" class="lic-input" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false">
+                    <button class="dc-login-btn" onclick="licenseActivate()">ライセンスを有効化</button>
+                    <button class="dc-join-btn" style="margin-top: 10px;" onclick="licensePurchase()">プランを見る・購入する</button>
+                    <p id="licStatusMsg" class="dc-login-status"></p>
+                </div>
+                <div id="licActive" style="display: none;">
+                    <div class="dc-profile">
+                        <div class="dc-hero-icon lic-active-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+                        </div>
+                        <div class="dc-profile-info">
+                            <div class="dc-name" id="licKeyMasked">-</div>
+                            <div class="dc-status"><span class="dc-dot"></span><span id="licStatusText">Premium</span></div>
+                        </div>
+                    </div>
+                    <button class="dc-logout-btn" onclick="licenseDeactivate()">ライセンスを無効化</button>
+                </div>
+            </div>
+
+        </section>
     </main>
+    </div>
+
+    <!-- Trailer Overlay -->
+    <div class="trailer-overlay" id="trailerOverlay">
+        <div class="trailer-box">
+            <button class="trailer-close" id="trailerClose" title="閉じる">&times;</button>
+            <video id="trailerVideo" src="Zero.mp4" playsinline></video>
+        </div>
+    </div>
+
+    <!-- Login Gate -->
+    <div class="login-gate" id="loginGate">
+        <div class="gate-card">
+            <img src="logo.png" class="gate-logo" alt="Zero">
+            <h2>ZERO</h2>
+            <div class="gate-sub">Discordアカウントでログイン</div>
+            <p class="gate-desc">Zeroの機能を利用するにはDiscordアカウントでのログインが必要です。<br>ログインすると公式コミュニティサーバーにも参加できます。</p>
+            <button class="gate-discord-btn" id="gateLoginBtn" onclick="startDiscordLogin()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+                Discordでログイン
+            </button>
+            <div class="gate-status" id="gateLoginStatus"></div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
 
     <script>
-        const { invoke } = window.__TAURI__?.core || {};
+        const { invoke: rawInvoke } = window.__TAURI__?.core || {};
+        let discordLoggedIn = false;
+        let premiumActive = false;
+
+        // Discordログイン必須のコマンド（読み取り系・連携系は除く）
+        const DISCORD_GATED_COMMANDS = new Set([
+            'free_memory', 'kill_processes', 'disable_services', 'optimize_network', 'network_boost',
+            'apply_tweak', 'apply_game_profile', 'set_startup_app', 'create_restore_point',
+            'clean_temp_files', 'clean_disk_deep', 'registry_clean', 'restore_tweak',
+            'repair_network', 'repair_system_files', 'repair_disk', 'flush_dns_cache',
+            'install_update'
+        ]);
+
+        // 有料ライセンス必須のコマンド（アップデートは常に許可）
+        const PREMIUM_GATED_COMMANDS = new Set([
+            'free_memory', 'kill_processes', 'disable_services', 'optimize_network', 'network_boost',
+            'apply_tweak', 'apply_game_profile', 'set_startup_app', 'create_restore_point',
+            'clean_temp_files', 'clean_disk_deep', 'registry_clean', 'restore_tweak',
+            'repair_network', 'repair_system_files', 'repair_disk', 'flush_dns_cache'
+        ]);
+
+        function showLoginGate() {
+            const g = document.getElementById('loginGate');
+            if (g) g.classList.add('show');
+        }
+
+        function hideLoginGate() {
+            const g = document.getElementById('loginGate');
+            if (g) g.classList.remove('show');
+        }
+
+        const invoke = rawInvoke ? async (cmd, args) => {
+            if (DISCORD_GATED_COMMANDS.has(cmd) && !discordLoggedIn) {
+                showToast('Discordログインが必要です', 'error');
+                showLoginGate();
+                throw new Error('discord login required');
+            }
+            if (PREMIUM_GATED_COMMANDS.has(cmd) && discordLoggedIn && !premiumActive) {
+                showToast('Premiumライセンスが必要です', 'error');
+                const nav = document.querySelector('.nav-item[data-page="account"]');
+                if (nav) nav.click();
+                throw new Error('premium license required');
+            }
+            return rawInvoke(cmd, args);
+        } : undefined;
+
+        // Title bar window controls
+        (function () {
+            const minimizeBtn = document.getElementById('tbMinimize');
+            const closeBtn = document.getElementById('tbClose');
+            const dragArea = document.querySelector('.titlebar-drag');
+            if (minimizeBtn) minimizeBtn.addEventListener('click', () => invoke && invoke('win_minimize'));
+            if (closeBtn) closeBtn.addEventListener('click', () => invoke && invoke('win_close'));
+            if (dragArea) dragArea.addEventListener('mousedown', (e) => {
+                if (e.button === 0 && invoke) invoke('win_drag');
+            });
+        })();
+
+        // Trailer
+        async function getAppVersion() {
+            try {
+                const v = await window.__TAURI__?.app?.getVersion?.();
+                if (v) return v;
+            } catch (e) {}
+            return '2.2.0';
+        }
+
+        function openTrailer() {
+            const ov = document.getElementById('trailerOverlay');
+            const v = document.getElementById('trailerVideo');
+            if (ov) ov.classList.add('show');
+            if (v) { v.currentTime = 0; v.play().catch(() => {}); }
+        }
+
+        async function markTrailerSeen() {
+            try {
+                await saveSettings({ trailer_version: await getAppVersion() });
+            } catch (e) {}
+        }
+
+        function closeTrailer() {
+            const ov = document.getElementById('trailerOverlay');
+            const v = document.getElementById('trailerVideo');
+            if (v) v.pause();
+            if (ov) ov.classList.remove('show');
+            markTrailerSeen();
+        }
+
+        // Auto-show trailer once per version (after update / first run)
+        (async () => {
+            try {
+                const s = await getSettings();
+                if (s.trailer_version !== await getAppVersion()) openTrailer();
+            } catch (e) {}
+        })();
+
+        document.getElementById('trailerClose')?.addEventListener('click', closeTrailer);
+        document.getElementById('trailerOverlay')?.addEventListener('click', (e) => {
+            if (e.target.id === 'trailerOverlay') closeTrailer();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const ov = document.getElementById('trailerOverlay');
+                if (ov && ov.classList.contains('show')) closeTrailer();
+            }
+        });
+
+        // Toast notifications
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('hiding');
+                setTimeout(() => toast.remove(), 350);
+            }, 4000);
+        }
 
         // Navigation
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -1554,6 +2715,18 @@
                 // Update memory cleaner data when navigating to that page
                 if (page === 'memory-cleaner') {
                     updateMemoryCleanerData();
+                }
+                if (page === 'system-restore') {
+                    loadRestorePoints();
+                }
+                if (page === 'app-optimizer') {
+                    loadStartupApps();
+                }
+                if (page === 'scheduler') {
+                    loadSchedulerUI();
+                }
+                if (page === 'game-profiles') {
+                    pollDetectedGames();
                 }
             });
         });
@@ -1579,7 +2752,6 @@
 
         // Initialize gauges
         updateGauge('cpuGauge', 'cpuValue', 35);
-        updateGauge('gpuGauge', 'gpuValue', 8);
         updateGauge('ramGauge', 'ramValue', 28);
 
         // Temperature tabs
@@ -1647,31 +2819,85 @@
         loadTemperatureData();
         setInterval(loadTemperatureData, 5000);
 
+        function formatBytes(bytes) {
+            const gb = bytes / 1024 / 1024 / 1024;
+            if (gb >= 1) return gb.toFixed(1) + ' GB';
+            return Math.round(bytes / 1024 / 1024) + ' MB';
+        }
+
         // System status
         async function loadSystemStatus() {
             try {
                 if (!invoke) return;
-                
-                const status = await invoke('get_system_status');
-                
+
+                const [status, info] = await Promise.all([
+                    invoke('get_system_status'),
+                    invoke('get_system_info').catch(() => null),
+                ]);
+
                 const totalMB = Math.round(status.total_memory / 1024 / 1024);
                 const usedMB = Math.round(status.used_memory / 1024 / 1024);
                 const ramPercent = Math.round((usedMB / totalMB) * 100);
-                
+
                 updateGauge('ramGauge', 'ramValue', ramPercent);
 
-                const processList = document.getElementById('processList');
+                // CPU gauges & disk from get_system_info
+                if (info) {
+                    updateGauge('cpuGauge', 'cpuValue', Math.round(info.cpu_usage));
+
+                    // Disk (C: ドライブ優先、なければ最初の固定ディスク)
+                    const disk = (info.disks || []).find(d => d.mount === 'C:\\' || d.mount === 'C:') || info.disks[0];
+                    if (disk && disk.total > 0) {
+                        const usedPct = Math.round(((disk.total - disk.available) / disk.total) * 100);
+                        const diskBar = document.getElementById('diskBar');
+                        const diskValue = document.getElementById('diskValue');
+                        if (diskBar) diskBar.style.width = usedPct + '%';
+                        if (diskValue) diskValue.textContent = `${formatBytes(disk.total - disk.available)} / ${formatBytes(disk.total)}`;
+                    }
+
+                    // Resources page fields
+                    const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+                    setText('cpuName', info.cpu_name || '-');
+                    setText('cpuCores', info.cpu_cores ?? '-');
+                    setText('cpuThreads', info.cpu_threads ?? '-');
+                    setText('cpuUsageDetail', Math.round(info.cpu_usage) + '%');
+                    setText('totalRam', formatBytes(info.total_ram));
+                    setText('availableRam', formatBytes(info.total_ram - info.used_ram));
+                    setText('usedRam', formatBytes(info.used_ram));
+                    setText('osName', info.os_name || '-');
+                    setText('osVersion', info.os_version || '-');
+                    const up = info.uptime_secs || 0;
+                    setText('uptime', `${Math.floor(up / 3600)}h ${Math.floor((up % 3600) / 60)}m`);
+                }
+
+                // プロセス一覧（CPU使用率付き）— 1回だけ取得して両方に使う
+                let allProcs = null;
+                try { allProcs = await invoke('get_process_list'); } catch (e) {}
+                const procs = (allProcs && allProcs.length) ? allProcs.slice(0, 10) : status.top_processes;
+                let processList = document.getElementById('processList');
                 processList.innerHTML = '';
-                
-                status.top_processes.forEach((process, index) => {
+
+                procs.forEach((process, index) => {
+                    const cpuTxt = process.cpu !== undefined ? ` / CPU ${Math.round(process.cpu)}%` : '';
+                    const mem = process.memory_usage !== undefined ? process.memory_usage : process.memory;
                     const div = document.createElement('div');
                     div.className = 'process-item';
                     div.innerHTML = `
-                        <span class="process-name">${index + 1}. ${process.name} (PID: ${process.pid})</span>
-                        <span class="process-memory">${Math.round(process.memory_usage / 1024 / 1024)} MB</span>
+                        <span class="process-name">${index + 1}. ${escHtml(process.name)} (PID: ${process.pid})</span>
+                        <span class="process-memory">${Math.round(mem) / 1024 / 1024} MB${cpuTxt}</span>
                     `;
                     processList.appendChild(div);
                 });
+
+                // Resources page: 全プロセス一覧
+                const allList = document.getElementById('allProcessList');
+                if (allList && allProcs) {
+                    allList.innerHTML = allProcs.map(p => `
+                        <div class="process-item">
+                            <span class="process-name">${escHtml(p.name)} (PID: ${p.pid})</span>
+                            <span class="process-memory">${(p.memory / 1024 / 1024).toFixed(0)} MB / CPU ${Math.round(p.cpu)}%</span>
+                        </div>`).join('');
+                }
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -1683,7 +2909,7 @@
                 if (invoke) {
                     await invoke('free_memory');
                 }
-                alert('メモリ解放完了');
+                showToast('メモリを解放しました');
                 loadSystemStatus();
                 updateMemoryCleanerData();
             } catch (error) {
@@ -1697,7 +2923,7 @@
                     await invoke('free_memory');
                     await invoke('kill_processes');
                 }
-                alert('ディープクリーン完了');
+                showToast('ディープクリーンが完了しました');
                 loadSystemStatus();
                 updateMemoryCleanerData();
             } catch (error) {
@@ -1710,7 +2936,7 @@
                 if (invoke) {
                     await invoke('kill_processes');
                 }
-                alert('プロセス終了完了');
+                showToast('不要プロセスを終了しました');
                 loadSystemStatus();
                 updateMemoryCleanerData();
             } catch (error) {
@@ -1742,74 +2968,449 @@
         }
 
         function cleanDisk() {
-            alert('ディスククリーンアップ機能（開発中）');
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            invoke('clean_temp_files')
+                .then(r => showToast(r))
+                .catch(e => showToast('クリーンアップに失敗しました: ' + e, 'error'));
         }
 
-        function toggleOptimization() {
+        function cleanDiskDeep() {
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            showToast('ディープクリーンを実行中...', 'info');
+            invoke('clean_disk_deep')
+                .then(r => showToast(r))
+                .catch(e => showToast('ディープクリーンに失敗しました: ' + e, 'error'));
+        }
+
+        function registryClean() {
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            showToast('レジストリをクリア中...', 'info');
+            invoke('registry_clean')
+                .then(r => showToast(r))
+                .catch(e => showToast('レジストリクリアに失敗しました: ' + e, 'error'));
+        }
+
+        // Restore points
+        async function createRestorePoint() {
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            try {
+                const result = await invoke('create_restore_point', { name: 'Zero Restore Point' });
+                showToast(result);
+                loadRestorePoints();
+            } catch (error) {
+                showToast('復元ポイント作成に失敗しました: ' + error, 'error');
+            }
+        }
+
+        async function loadRestorePoints() {
+            const list = document.getElementById('restorePointsList');
+            if (!list || !invoke) return;
+            try {
+                const points = await invoke('list_restore_points');
+                if (!points || points.length === 0) {
+                    list.innerHTML = '<div class="process-item"><span class="process-name" style="color: rgba(255,255,255,0.5);">復元ポイントがありません</span></div>';
+                    return;
+                }
+                list.innerHTML = points.map(p => `
+                    <div class="process-item">
+                        <span class="process-name">${escHtml(p.description)}</span>
+                        <span style="color: rgba(255,255,255,0.6);">${escHtml(p.creation_time)}</span>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('restore points error:', error);
+            }
+        }
+
+        function escHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        async function toggleOptimization() {
             const status = document.getElementById('ascensionStatus');
             if (status.textContent === 'INACTIVE') {
                 status.textContent = 'ACTIVE';
                 status.classList.add('active');
+                if (invoke) {
+                    try {
+                        await invoke('free_memory');
+                        await invoke('kill_processes');
+                        await invoke('disable_services');
+                        await invoke('optimize_network');
+                    } catch (error) {
+                        console.error('Optimization error:', error);
+                    }
+                }
             } else {
                 status.textContent = 'INACTIVE';
                 status.classList.remove('active');
             }
         }
 
+        // Networking tweaks
+        async function applyNetworkTweaks(button) {
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            try {
+                const result = await invoke('optimize_network');
+                if (button && button.textContent === 'Apply') {
+                    button.textContent = 'Applied';
+                    button.style.background = 'rgba(59,130,246,0.3)';
+                    button.style.borderColor = 'rgba(59,130,246,0.5)';
+                }
+                showToast(result);
+            } catch (error) {
+                console.error('Network optimization error:', error);
+                showToast('ネットワーク最適化中にエラーが発生しました: ' + error, 'error');
+            }
+        }
+
+        async function runPingTest() {
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            try {
+                const result = await invoke('ping_test');
+                showToast(`平均ping: ${Math.round(result.avg_ms)} ms (${result.replies}回応答)`, 'info');
+            } catch (error) {
+                console.error('Ping test error:', error);
+                showToast('pingテスト中にエラーが発生しました: ' + error, 'error');
+            }
+        }
+
+        async function boostNetwork() {
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            try {
+                const result = await invoke('network_boost');
+                showToast(result);
+            } catch (error) {
+                console.error('Network boost error:', error);
+                showToast('回線ブースト中にエラーが発生しました: ' + error, 'error');
+            }
+        }
+
         // System Restore functions
         function createRestorePoint() {
-            alert('復元ポイントを作成中...');
+            showToast('復元ポイントを作成中...', 'info');
         }
 
         // Fixes functions
-        function fixNetwork() {
-            alert('ネットワーク診断・修復を実行中...');
+        async function runFix(command, label) {
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            try {
+                const result = await invoke(command);
+                showToast(result || `${label}が完了しました`);
+            } catch (error) {
+                showToast(`${label}中にエラーが発生しました: ${error}`, 'error');
+            }
         }
 
-        function flushDNS() {
-            alert('DNSキャッシュをクリア中...');
-        }
+        function fixNetwork() { runFix('repair_network', 'ネットワーク修復'); }
+        function flushDNS() { runFix('flush_dns_cache', 'DNSクリア'); }
+        function repairSystemFiles() { runFix('repair_system_files', 'システムファイル修復'); }
+        function repairDisk() { runFix('repair_disk', 'ディスク修復'); }
 
-        function repairSystemFiles() {
-            alert('システムファイルの修復を実行中...');
-        }
-
-        function repairDisk() {
-            alert('ディスク修復を実行中...');
-        }
-
-        // Tweaks functions
-        function toggleTweak(button) {
-            if (button.textContent === 'Apply' || button.textContent === 'Remove') {
+        // Tweaks functions (Apply → Applied → クリックで復元 → Apply)
+        async function toggleTweak(button, id) {
+            const state = button.dataset.state || 'apply';
+            if (state === 'apply') {
+                if (invoke && id) {
+                    try {
+                        const result = await invoke('apply_tweak', { id });
+                        showToast(result);
+                    } catch (error) {
+                        showToast('適用に失敗しました: ' + error, 'error');
+                        return;
+                    }
+                }
+                if (!button.dataset.origLabel) button.dataset.origLabel = button.textContent;
+                button.dataset.state = 'applied';
                 button.textContent = 'Applied';
-                button.style.background = 'rgba(255,51,51,0.3)';
-                button.style.borderColor = 'rgba(255,51,51,0.5)';
-            } else {
-                button.textContent = 'Apply';
+                button.style.background = 'rgba(59,130,246,0.3)';
+                button.style.borderColor = 'rgba(59,130,246,0.5)';
+            } else if (state === 'applied') {
+                if (invoke && id) {
+                    try {
+                        const result = await invoke('restore_tweak', { id });
+                        showToast(result);
+                    } catch (error) {
+                        showToast('復元に失敗しました: ' + error, 'error');
+                        return;
+                    }
+                }
+                button.dataset.state = 'apply';
+                button.textContent = button.dataset.origLabel || 'Apply';
                 button.style.background = '';
                 button.style.borderColor = '';
             }
         }
 
-        function toggleStartup(button) {
-            if (button.textContent === 'Disable') {
-                button.textContent = 'Enable';
-                button.style.background = 'rgba(255,51,51,0.3)';
-                button.style.borderColor = 'rgba(255,51,51,0.5)';
-            } else {
-                button.textContent = 'Disable';
-                button.style.background = '';
-                button.style.borderColor = '';
+        // Startup apps
+        async function loadStartupApps() {
+            const list = document.getElementById('startupAppsList');
+            if (!list || !invoke) return;
+            try {
+                const [apps, settings] = await Promise.all([
+                    invoke('get_startup_apps'),
+                    invoke('settings_get').catch(() => ({})),
+                ]);
+                const backup = (settings && settings.startup_apps_backup) || {};
+                const enabledKeys = new Set(apps.map(a => `${a.hive}|${a.name}`));
+                let html = '';
+                for (const a of apps) {
+                    html += startupAppHtml(a.name, a.command, a.hive, true);
+                }
+                for (const key of Object.keys(backup)) {
+                    if (enabledKeys.has(key)) continue;
+                    const sep = key.indexOf('|');
+                    const hive = key.slice(0, sep);
+                    const name = key.slice(sep + 1);
+                    html += startupAppHtml(name, backup[key], hive, false);
+                }
+                list.innerHTML = html || '<div class="process-item"><span class="process-name" style="color: rgba(255,255,255,0.5);">起動アプリがありません</span></div>';
+            } catch (error) {
+                console.error('startup apps error:', error);
+                list.innerHTML = '<div class="process-item"><span class="process-name" style="color: rgba(255,255,255,0.5);">取得に失敗しました</span></div>';
+            }
+        }
+
+        function startupAppHtml(name, command, hive, enabled) {
+            const safeName = escHtml(name);
+            const safeCmd = escHtml(command.length > 80 ? command.slice(0, 80) + '…' : command);
+            const btnLabel = enabled ? 'Disable' : 'Enable';
+            const btnStyle = enabled ? '' : 'background: rgba(59,130,246,0.3); border-color: rgba(59,130,246,0.5);';
+            return `
+                <div class="process-item">
+                    <div>
+                        <div class="process-name">${safeName}</div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 480px;">${safeCmd}</div>
+                    </div>
+                    <button class="view-details-btn" style="${btnStyle}" data-name="${safeName}" data-command="${escHtml(command)}" data-hive="${hive}" data-enabled="${enabled ? 1 : 0}" onclick="toggleStartupApp(this)">${btnLabel}</button>
+                </div>`;
+        }
+
+        async function toggleStartupApp(btn) {
+            if (!invoke) return;
+            const name = btn.dataset.name;
+            const command = btn.dataset.command;
+            const hive = btn.dataset.hive;
+            const enabled = btn.dataset.enabled === '1';
+            try {
+                const result = await invoke('set_startup_app', {
+                    hive, name, command, enabled: !enabled,
+                });
+                showToast(result);
+                loadStartupApps();
+            } catch (error) {
+                showToast('変更に失敗しました: ' + error, 'error');
             }
         }
 
         // Game Profiles
-        function applyGameProfile(profile) {
-            alert(`${profile} プロファイルを適用中...`);
+        async function applyGameProfile(profile) {
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            try {
+                const result = await invoke('apply_game_profile', { profile });
+                showToast(result);
+            } catch (error) {
+                showToast('プロファイル適用に失敗しました: ' + error, 'error');
+            }
         }
 
         function createCustomProfile() {
-            alert('カスタムプロファイル作成機能（開発中）');
+            showToast('カスタムプロファイル作成機能は開発中です', 'info');
+        }
+
+        // ===================== Scheduler =====================
+        let schedulerSettings = { enabled: false, time: '03:00', action: 'optimize', last_run: '' };
+
+        async function getSettings() {
+            try {
+                if (!invoke) return {};
+                return await invoke('settings_get');
+            } catch (e) { return {}; }
+        }
+
+        async function saveSettings(patch) {
+            try {
+                if (!invoke) return;
+                const s = await getSettings();
+                const merged = { ...s, ...patch };
+                // schedule はネストなので個別にマージ
+                if (patch.schedule) merged.schedule = { ...(s.schedule || {}), ...patch.schedule };
+                await invoke('settings_set', { settings: merged });
+            } catch (e) { console.error('settings save error:', e); }
+        }
+
+        async function loadSchedulerUI() {
+            const settings = await getSettings();
+            schedulerSettings = { ...schedulerSettings, ...(settings.schedule || {}) };
+            const en = document.getElementById('schedEnabled');
+            const tm = document.getElementById('schedTime');
+            const ac = document.getElementById('schedAction');
+            if (en) en.checked = !!schedulerSettings.enabled;
+            if (tm) tm.value = schedulerSettings.time || '03:00';
+            if (ac) ac.value = schedulerSettings.action || 'optimize';
+            updateSchedulerStatus();
+        }
+
+        function updateSchedulerStatus() {
+            const nextEl = document.getElementById('schedNext');
+            const lastEl = document.getElementById('schedLast');
+            if (nextEl) {
+                if (schedulerSettings.enabled && schedulerSettings.time) {
+                    const [h, m] = schedulerSettings.time.split(':').map(Number);
+                    const now = new Date();
+                    const next = new Date(now);
+                    next.setHours(h, m, 0, 0);
+                    if (next <= now) next.setDate(next.getDate() + 1);
+                    nextEl.textContent = `${next.getMonth() + 1}/${next.getDate()} ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+                } else {
+                    nextEl.textContent = '無効';
+                }
+            }
+            if (lastEl) lastEl.textContent = schedulerSettings.last_run || '未実行';
+        }
+
+        async function saveSchedulerSettings() {
+            const en = document.getElementById('schedEnabled');
+            const tm = document.getElementById('schedTime');
+            const ac = document.getElementById('schedAction');
+            schedulerSettings.enabled = en ? en.checked : false;
+            schedulerSettings.time = tm ? tm.value : '03:00';
+            schedulerSettings.action = ac ? ac.value : 'optimize';
+            await saveSettings({ schedule: schedulerSettings });
+            updateSchedulerStatus();
+            showToast('スケジュール設定を保存しました', 'info');
+        }
+
+        async function runSchedulerAction(action) {
+            if (!invoke) return;
+            if (action === 'optimize') {
+                await invoke('free_memory').catch(() => {});
+                await invoke('optimize_network').catch(() => {});
+                showToast('スケジュール実行: 最適化が完了しました');
+            } else if (action === 'clean') {
+                await invoke('clean_temp_files').catch(() => {});
+                await invoke('clean_disk_deep').catch(() => {});
+                showToast('スケジュール実行: ディスククリーンが完了しました');
+            } else if (action === 'boost') {
+                const r = await invoke('network_boost');
+                showToast('スケジュール実行: ' + r);
+            }
+            loadSystemStatus();
+        }
+
+        async function checkScheduler() {
+            if (!invoke || !schedulerSettings.enabled || !schedulerSettings.time) return;
+            const now = new Date();
+            const today = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+            if (schedulerSettings.last_run === today) return;
+            const [h, m] = schedulerSettings.time.split(':').map(Number);
+            const target = new Date(now);
+            target.setHours(h, m, 0, 0);
+            if (now < target) return;
+            schedulerSettings.last_run = today;
+            await saveSettings({ schedule: schedulerSettings });
+            updateSchedulerStatus();
+            runSchedulerAction(schedulerSettings.action);
+        }
+
+        async function runSchedulerNow() {
+            const ac = document.getElementById('schedAction');
+            const action = ac ? ac.value : 'optimize';
+            showToast('スケジュールを今すぐ実行します', 'info');
+            await runSchedulerAction(action);
+        }
+
+        // ===================== Game Auto Detect =====================
+        let gameAutoEnabled = false;
+        let appliedGamePids = new Set();
+        let detectedGames = [];
+
+        async function initGameAutoDetect() {
+            const settings = await getSettings();
+            gameAutoEnabled = !!(settings.game_auto_profile);
+            const cb = document.getElementById('gameAutoDetect');
+            if (cb) cb.checked = gameAutoEnabled;
+            pollDetectedGames();
+        }
+
+        async function toggleGameAutoDetect() {
+            const cb = document.getElementById('gameAutoDetect');
+            gameAutoEnabled = cb ? cb.checked : false;
+            await saveSettings({ game_auto_profile: gameAutoEnabled });
+            appliedGamePids.clear();
+            showToast(gameAutoEnabled ? 'ゲーム自動検出を有効化しました' : 'ゲーム自動検出を無効化しました', 'info');
+        }
+
+        async function pollDetectedGames() {
+            if (!invoke) return;
+            try {
+                const games = await invoke('detect_games');
+                detectedGames = games || [];
+                renderDetectedGames();
+
+                if (gameAutoEnabled) {
+                    const currentPids = new Set(detectedGames.map(g => g.pid));
+                    // 終了したゲームのPIDを忘れる
+                    for (const pid of appliedGamePids) {
+                        if (!currentPids.has(pid)) appliedGamePids.delete(pid);
+                    }
+                    for (const g of detectedGames) {
+                        if (!appliedGamePids.has(g.pid)) {
+                            appliedGamePids.add(g.pid);
+                            try {
+                                await invoke('apply_game_profile', { profile: 'competitive' });
+                                showToast(`ゲーム検出: ${g.name} — Competitiveプロファイルを適用しました`, 'info');
+                            } catch (e) { console.error('auto profile error:', e); }
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('detect games error:', e);
+            }
+        }
+
+        function renderDetectedGames() {
+            const list = document.getElementById('detectedGamesList');
+            if (!list) return;
+            if (!detectedGames.length) {
+                list.innerHTML = '<div class="process-item"><span class="process-name" style="color: rgba(255,255,255,0.5);">検出中のゲームはありません</span></div>';
+                return;
+            }
+            list.innerHTML = detectedGames.map(g => `
+                <div class="process-item">
+                    <div>
+                        <div class="process-name">${escHtml(g.name)}</div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 480px;">${escHtml(g.title)}</div>
+                    </div>
+                    <span class="tweak-badge">PID ${g.pid}</span>
+                </div>`).join('');
         }
 
         // Check for updates
@@ -1825,14 +3426,14 @@
                             await installUpdate();
                         }
                     } else {
-                        alert('最新バージョンを使用しています');
+                        showToast('最新バージョンを使用しています', 'info');
                     }
                 } else {
-                    alert('アップデート機能は現在利用できません');
+                    showToast('アップデート機能は現在利用できません', 'error');
                 }
             } catch (error) {
                 console.error('Update check error:', error);
-                alert('アップデートチェック中にエラーが発生しました: ' + error);
+                showToast('アップデートチェック中にエラーが発生しました: ' + error, 'error');
             }
         }
 
@@ -1865,7 +3466,7 @@
             try {
                 if (invoke) {
                     const result = await invoke('install_update');
-                    alert(result);
+                    showToast(result);
 
                     const updateBanner = document.getElementById('updateBanner');
                     if (updateBanner) {
@@ -1874,7 +3475,7 @@
                 }
             } catch (error) {
                 console.error('Install update error:', error);
-                alert('更新中にエラーが発生しました: ' + error);
+                showToast('更新中にエラーが発生しました: ' + error, 'error');
             }
         }
 
@@ -1886,22 +3487,212 @@
             }
         }
 
+        // ===================== Discord連携 =====================
+        const DISCORD_INVITE_URL = 'https://discord.gg/yHrB7v66UV';
+        let dcPollTimer = null;
+
+        async function refreshDiscordStatus() {
+            try {
+                if (!invoke) return;
+                const status = await invoke('discord_status');
+                discordLoggedIn = !!status.logged_in;
+                if (discordLoggedIn) hideLoginGate(); else showLoginGate();
+                document.getElementById('dcLoggedOutCard').style.display = status.logged_in ? 'none' : 'block';
+                document.getElementById('dcLoggedInCard').style.display = status.logged_in ? 'block' : 'none';
+                if (status.logged_in) {
+                    document.getElementById('dcLoginName').textContent = status.login;
+                    const avatar = document.getElementById('dcAvatar');
+                    if (avatar && status.avatar_url) {
+                        avatar.src = status.avatar_url;
+                        avatar.style.display = 'block';
+                    } else if (avatar) {
+                        avatar.style.display = 'none';
+                    }
+                }
+            } catch (error) {
+                console.error('discord status error:', error);
+            }
+        }
+
+        async function refreshDiscordServerInfo() {
+            try {
+                if (!invoke) return;
+                const info = await invoke('discord_server_info');
+                if (info && info.ok) {
+                    document.getElementById('dcServerName').textContent = info.name || 'Discord Server';
+                    document.getElementById('dcServerMembers').textContent =
+                        `メンバー: 約${info.member_count ?? '-'}人 / オンライン: 約${info.online_count ?? '-'}人`;
+                    const icon = document.getElementById('dcServerIcon');
+                    if (icon && info.icon_url) {
+                        icon.innerHTML = `<img src="${info.icon_url}" alt="">`;
+                    }
+                }
+            } catch (e) {}
+        }
+
+        async function startDiscordLogin() {
+            if (!invoke) {
+                showToast('この機能はデスクトップアプリでのみ利用できます', 'error');
+                return;
+            }
+            try {
+                const url = await invoke('discord_login_start');
+                document.getElementById('dcLoginStatus').style.display = 'block';
+                document.getElementById('dcLoginBtn').disabled = true;
+                const gateStatus = document.getElementById('gateLoginStatus');
+                if (gateStatus) { gateStatus.textContent = 'ブラウザでDiscord認証を完了してください...'; gateStatus.className = 'gate-status'; }
+                try { await invoke('github_open_url', { url }); } catch (e) {}
+                pollDiscordLogin();
+            } catch (error) {
+                console.error('discord login start error:', error);
+                const gateStatus = document.getElementById('gateLoginStatus');
+                if (gateStatus) { gateStatus.textContent = 'エラー: ' + error; gateStatus.className = 'gate-status error'; }
+                showToast('Discordログイン開始に失敗しました: ' + error, 'error');
+            }
+        }
+
+        function pollDiscordLogin() {
+            if (dcPollTimer) clearTimeout(dcPollTimer);
+            dcPollTimer = setTimeout(async () => {
+                try {
+                    const res = await invoke('discord_login_poll');
+                    if (res.status === 'success') {
+                        document.getElementById('dcLoginStatus').style.display = 'none';
+                        document.getElementById('dcLoginBtn').disabled = false;
+                        const gateStatus = document.getElementById('gateLoginStatus');
+                        if (gateStatus) { gateStatus.textContent = ''; gateStatus.className = 'gate-status'; }
+                        hideLoginGate();
+                        discordLoggedIn = true;
+                        if (res.joined) {
+                            showToast(`Discordにログインしました: ${res.login}（サーバーに参加しました）`);
+                        } else {
+                            showToast(`Discordにログインしました: ${res.login}`);
+                        }
+                        refreshDiscordStatus();
+                        return;
+                    } else if (res.status === 'pending') {
+                        dcPollTimer = setTimeout(pollDiscordLogin, 2000);
+                        return;
+                    } else {
+                        document.getElementById('dcLoginStatus').style.display = 'none';
+                        document.getElementById('dcLoginBtn').disabled = false;
+                        const gateStatus = document.getElementById('gateLoginStatus');
+                        if (gateStatus) { gateStatus.textContent = 'エラー: ' + (res.message || 'unknown'); gateStatus.className = 'gate-status error'; }
+                        showToast('Discordログインに失敗しました: ' + (res.message || 'unknown'), 'error');
+                        return;
+                    }
+                } catch (error) {
+                    console.error('discord poll error:', error);
+                    dcPollTimer = setTimeout(pollDiscordLogin, 3000);
+                }
+            }, 1500);
+        }
+
+        async function discordLogout() {
+            if (!invoke) return;
+            try {
+                await invoke('discord_logout');
+                showToast('Discordからログアウトしました');
+                refreshDiscordStatus();
+            } catch (error) {
+                showToast('ログアウトに失敗しました: ' + error, 'error');
+            }
+        }
+
+        async function discordJoinServer() {
+            if (!invoke) return;
+            try { await invoke('github_open_url', { url: DISCORD_INVITE_URL }); } catch (e) {}
+        }
+
+        // ===================== Premiumライセンス（Lemon Squeezy） =====================
+        // Lemon Squeezyで作成したストアのチェックアウトURLをここに設定
+        const LS_CHECKOUT_URL = '';
+
+        function setLicMessage(msg, isError) {
+            const el = document.getElementById('licStatusMsg');
+            if (!el) return;
+            el.textContent = msg || '';
+            el.className = 'dc-login-status' + (isError ? ' error' : '');
+        }
+
+        async function refreshLicenseStatus() {
+            try {
+                if (!invoke) return;
+                const res = await invoke('license_status');
+                premiumActive = !!res.activated && res.status === 'active';
+                document.getElementById('licInactive').style.display = premiumActive ? 'none' : 'block';
+                document.getElementById('licActive').style.display = premiumActive ? 'block' : 'none';
+                if (res.activated) {
+                    document.getElementById('licKeyMasked').textContent = res.key_masked || '-';
+                    const labels = { active: 'Premium（有効）', inactive: 'サブスクリプション停止中', expired: '期限切れ', invalid: '無効なキー', unknown: '確認できません（オフライン）' };
+                    document.getElementById('licStatusText').textContent = labels[res.status] || res.status;
+                }
+            } catch (e) {
+                console.error('license status error:', e);
+            }
+        }
+
+        async function licenseActivate() {
+            if (!invoke) return;
+            const input = document.getElementById('licKeyInput');
+            const key = (input.value || '').trim();
+            if (!key) {
+                setLicMessage('ライセンスキーを入力してください', true);
+                return;
+            }
+            setLicMessage('確認中...');
+            try {
+                const res = await invoke('license_activate', { key });
+                input.value = '';
+                premiumActive = res.activated && res.status === 'active';
+                showToast('ライセンスを有効化しました');
+                refreshLicenseStatus();
+            } catch (error) {
+                setLicMessage('エラー: ' + error, true);
+                showToast('ライセンス有効化に失敗しました: ' + error, 'error');
+            }
+        }
+
+        async function licenseDeactivate() {
+            if (!invoke) return;
+            try {
+                await invoke('license_deactivate');
+                premiumActive = false;
+                showToast('ライセンスを無効化しました');
+                refreshLicenseStatus();
+            } catch (error) {
+                showToast('無効化に失敗しました: ' + error, 'error');
+            }
+        }
+
+        async function licensePurchase() {
+            if (!invoke) return;
+            if (!LS_CHECKOUT_URL) {
+                setLicMessage('購入ページは現在準備中です', true);
+                return;
+            }
+            try { await invoke('github_open_url', { url: LS_CHECKOUT_URL }); } catch (e) {}
+        }
+
         // Initial load
         if (invoke) {
             loadSystemStatus();
+            refreshDiscordStatus();
+            refreshDiscordServerInfo();
+            refreshLicenseStatus();
+            loadSchedulerUI();
+            initGameAutoDetect();
         }
+        // 定期的にシステム状態を更新（5秒ごと）
+        setInterval(loadSystemStatus, 5000);
+        // スケジューラ監視（30秒ごと）
+        setInterval(checkScheduler, 30000);
+        // ゲーム検出（15秒ごと）
+        setInterval(pollDetectedGames, 15000);
 
-        // Hide loading screen after page load
+        // Auto check for updates after page load
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loadingScreen = document.getElementById('loadingScreen');
-                if (loadingScreen) {
-                    loadingScreen.classList.add('hidden');
-                }
-                
-                // Auto check for updates after loading
-                autoCheckUpdate();
-            }, 1500);
+            autoCheckUpdate();
         });
     </script>
 </body>

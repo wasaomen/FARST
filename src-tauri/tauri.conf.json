@@ -1,22 +1,22 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "TOIRE",
-  "version": "0.3.5",
-  "identifier": "com.toire.app",
+  "productName": "Zero",
+  "version": "4.0.0",
+  "identifier": "com.zero.app",
   "build": {
     "frontendDist": "../dist"
   },
   "app": {
     "windows": [
       {
-        "title": "TOIRE - System Optimizer",
-        "width": 1400,
-        "height": 900,
-        "resizable": true,
+        "title": "Zero - System Optimizer",
+        "width": 1280,
+        "height": 800,
+        "resizable": false,
         "fullscreen": false,
-        "minWidth": 1200,
-        "minHeight": 700,
-        "decorations": true,
+        "minWidth": 1024,
+        "minHeight": 660,
+        "decorations": false,
         "transparent": false
       }
     ],
@@ -54,7 +54,7 @@
         "https://github.com/wasaomen/FARST/releases/latest/download/latest.json"
       ],
       "dialog": false,
-      "pubkey": ""
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUzMkU4QTkwQzU3Mjk3NTMKUldSVGwzTEZrSW91VTJBV3dIK2d2L1NMRTByTXBTWEpxK3FWTHkzRGVINGwxRDdWaVNwbG5MZFkK"
     }
   }
 }
